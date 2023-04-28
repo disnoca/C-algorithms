@@ -40,12 +40,21 @@ int test_bubble_sort(int length) {
 	return is_sorted(arr, length);
 }
 
+int test_merge_sort(int length) {
+	int* arr = get_randomized_int_array(length);
+
+	merge_sort(arr, length);
+	
+	return is_sorted(arr, length);
+}
+
 int main(void) {
 	srand(time(NULL));
 	int length = ARRAY_LENGTH;
 
 	printf("Insertion Sort: %d\n", test_insertion_sort(length));
 	printf("Bubble Sort: %d\n", test_bubble_sort(length));
+	printf("Merge Sort: %d\n", test_merge_sort(length));
 
 	return 0;
 }
