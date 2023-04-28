@@ -1,19 +1,22 @@
 CC = gcc
 CFLAGS = -Wall -Wextra
 
-FILE = stack
-TARGET = $(FILE)_tester
+SOURCES = \
+../../../wrapper_functions.c \
+stack.c
+
+TARGET = stack_tester
 
 all: $(TARGET)
 
-$(FILE).o: $(FILE).c $(FILE).h
-	$(CC) $(CFLAGS) -c $(FILE).c
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
-$(TARGET): $(TARGET).c $(FILE).o
-	$(CC) $(CFLAGS) -o $(TARGET) $(TARGET).c $(FILE).o ../../../wrapper_functions.c
+$(TARGET): $(TARGET).c $(SOURCES:.c=.o)
+	$(CC) $(CFLAGS) -o $@ $< $(SOURCES:.c=.o) 
 
 run: $(TARGET)
 	./$(TARGET)
 
 clean:
-	rm -f $(FILE) $(TARGET)
+	rm -f $(SOURCES) $(TARGET)

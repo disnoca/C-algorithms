@@ -1,21 +1,23 @@
 CC = gcc
 CFLAGS = -Wall -Wextra
 
-FILES :=\
-insertion_sort/insertion_sort
+SOURCES := \
+../wrapper_functions.c \
+insertion_sort/insertion_sort.c \
+bubble_sort/bubble_sort.c
 
 TARGET = sorting_tester
 
 all: $(TARGET)
 
-$(FILES).o: $(FILES).c
-	$(CC) $(CFLAGS) -c $(FILES).c -o $(FILES).o 
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
-$(TARGET): $(TARGET).c $(FILES).o
-	$(CC) $(CFLAGS) -o $(TARGET) $(TARGET).c $(FILES).o ../wrapper_functions.c
+$(TARGET): $(TARGET).c $(SOURCES:.c=.o)
+	$(CC) $(CFLAGS) -o $@ $< $(SOURCES:.c=.o) 
 
 run: $(TARGET)
 	./$(TARGET)
 
 clean:
-	rm -f $(FILES) $(TARGET)
+	rm -f $(SOURCES) $(TARGET)

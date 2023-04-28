@@ -7,10 +7,8 @@
 
 #define ARRAY_LENGTH 10000
 
-#define INSERTION_SORT 0
-
 static int* get_randomized_int_array(int length) {
-	int* arr = Malloc(sizeof(int) * length);
+	int* arr = Calloc(sizeof(int), length);
 
 	for(int i = 0; i < length; i++)
 		arr[i] = rand();
@@ -28,7 +26,19 @@ static bool is_sorted(int* arr, int length) {
 
 int test_insertion_sort(int length) {
 	int* arr = get_randomized_int_array(ARRAY_LENGTH);
+
 	insertion_sort(arr, length);
+
+	Free(arr);
+	return is_sorted(arr, length);
+}
+
+int test_bubble_sort(int length) {
+	int* arr = get_randomized_int_array(ARRAY_LENGTH);
+
+	bubble_sort(arr, length);
+
+	Free(arr);
 	return is_sorted(arr, length);
 }
 
@@ -37,6 +47,7 @@ int main(void) {
 	int length = ARRAY_LENGTH;
 
 	printf("Insertion Sort: %d\n", test_insertion_sort(length));
+	printf("Bubble Sort: %d\n", test_bubble_sort(length));
 
 	return 0;
 }
