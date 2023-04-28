@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "hash_map.h"
-#include "..\..\wrapper_functions.h"
+#include "../../../wrapper_functions.h"
 
 const HMNode EMPTY_NODE;
 

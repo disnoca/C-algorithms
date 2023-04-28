@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "avl_tree.h"
-#include "..\..\wrapper_functions.h"
+#include "../../../wrapper_functions.h"
 
 AVLTree* create_avltree_with_content() {
     AVLTree* tree = avlt_create();

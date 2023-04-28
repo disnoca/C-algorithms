@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "queue.h"
-#include "..\..\wrapper_functions.h"
+#include "../../../wrapper_functions.h"
 
 static const Queue EMPTY_QUEUE;
 

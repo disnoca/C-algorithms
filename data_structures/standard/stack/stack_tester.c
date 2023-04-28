@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "stack.h"
-#include "..\..\wrapper_functions.h"
+#include "../../../wrapper_functions.h"
 
 int check_stack_integrity(Stack* stack) {
     if(stack->size == 0) return 1;

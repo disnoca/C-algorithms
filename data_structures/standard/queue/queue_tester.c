@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "queue.h"
-#include "..\..\wrapper_functions.h"
+#include "../../../wrapper_functions.h"
 
 int check_queue_integrity(Queue* queue) {
     if(queue->size == 0) return 1;

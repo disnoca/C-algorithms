@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "avl_tree.h"
-#include "..\..\wrapper_functions.h"
+#include "../../../wrapper_functions.h"
 
 // This tree does not support duplicate elements (it doesn't make sense to anyway)
 

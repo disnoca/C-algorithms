@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "linked_list.h"
-#include "..\..\wrapper_functions.h"
+#include "../../../wrapper_functions.h"
 
 static const int NO_FREE = 0;
 static const int FREE = 1;

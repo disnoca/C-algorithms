@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "stack.h"
-#include "..\..\wrapper_functions.h"
+#include "../../../wrapper_functions.h"
 
 static const Stack EMPTY_STACK;
 

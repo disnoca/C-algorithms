@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "hash_map.h"
-#include "..\..\wrapper_functions.h"
+#include "../../../wrapper_functions.h"
 
 static const HMNode EMPTY_NODE;
 
