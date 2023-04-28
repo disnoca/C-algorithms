@@ -5,7 +5,7 @@
 #include "sorting.h"
 #include "../wrapper_functions.h"
 
-#define ARRAY_LENGTH 10000
+#define ARRAY_LENGTH 100
 
 static int* get_randomized_int_array(int length) {
 	int* arr = Calloc(sizeof(int), length);
@@ -25,20 +25,18 @@ static bool is_sorted(int* arr, int length) {
 }
 
 int test_insertion_sort(int length) {
-	int* arr = get_randomized_int_array(ARRAY_LENGTH);
+	int* arr = get_randomized_int_array(length);
 
 	insertion_sort(arr, length);
 
-	Free(arr);
 	return is_sorted(arr, length);
 }
 
 int test_bubble_sort(int length) {
-	int* arr = get_randomized_int_array(ARRAY_LENGTH);
+	int* arr = get_randomized_int_array(length);
 
 	bubble_sort(arr, length);
-
-	Free(arr);
+	
 	return is_sorted(arr, length);
 }
 
