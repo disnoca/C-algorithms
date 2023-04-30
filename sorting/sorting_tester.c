@@ -44,6 +44,16 @@ int test_bubble_sort(int length) {
 	return result;
 }
 
+int test_selection_sort(int length) {
+	int* arr = get_randomized_int_array(length);
+
+	selection_sort(arr, length);
+	
+	bool result = is_sorted(arr, length);
+	Free(arr);
+	return result;
+}
+
 int test_merge_sort(int length) {
 	int* arr = get_randomized_int_array(length);
 
@@ -80,6 +90,7 @@ int main(void) {
 
 	printf("Insertion Sort: %d\n", test_insertion_sort(length));
 	printf("Bubble Sort: %d\n", test_bubble_sort(length));
+	printf("Selection Sort: %d\n", test_selection_sort(length));
 	printf("Merge Sort: %d\n", test_merge_sort(length));
 	printf("Heap Sort: %d\n", test_heap_sort(length));
 	printf("Quick Sort: %d\n", test_quick_sort(length));

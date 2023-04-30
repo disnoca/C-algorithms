@@ -6,6 +6,7 @@ SOURCES := \
 helper_functions.c \
 insertion_sort/insertion_sort.c \
 bubble_sort/bubble_sort.c \
+selection_sort/selection_sort.c \
 merge_sort/merge_sort.c \
 heap_sort/heap_sort.c \
 quick_sort/quick_sort.c \

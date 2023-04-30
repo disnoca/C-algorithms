@@ -14,6 +14,14 @@ void insertion_sort(int* arr, int length);
 */
 void bubble_sort(int* arr, int length);
 
+/* Best: 	n^2
+ * Average: n^2
+ * Worst: 	n^2
+ * Memory: 	1
+ * Stable: 	Yes
+*/
+void selection_sort(int* arr, int length);
+
 /* Best: 	n*log(n)
  * Average: n*log(n)
  * Worst: 	n*log(n)
