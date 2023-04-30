@@ -1,4 +1,5 @@
 #include "../sorting.h"
+#include "../helper_functions.h"
 
 static void heapify(int* arr, int length, int root_pos) {
 	int largest_pos = root_pos;
@@ -11,10 +12,7 @@ static void heapify(int* arr, int length, int root_pos) {
 		largest_pos = right_pos;
 	
 	if(largest_pos != root_pos) {
-		int swap = arr[largest_pos];
-		arr[largest_pos] = arr[root_pos];
-		arr[root_pos] = swap;
-		
+		swap(arr, root_pos, largest_pos);
 		heapify(arr, length, largest_pos);
 	}
 }
@@ -25,10 +23,7 @@ void heap_sort(int* arr, int length) {
 	
 	int unsorted_size = length;
 	while(unsorted_size-- > 1) {				// add the root to the sorted partition
-		int temp = arr[0];
-		arr[0] = arr[unsorted_size];
-		arr[unsorted_size] = temp;
-	
+		swap(arr, 0, unsorted_size);
 		heapify(arr, unsorted_size, 0);
 	}
 }

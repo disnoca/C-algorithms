@@ -29,3 +29,11 @@ void merge_sort(int* arr, int length);
  * Stable: 	No
 */
 void heap_sort(int* arr, int length);
+
+/* Best: 	n*log(n)
+ * Average: n*log(n)
+ * Worst: 	n^2
+ * Memory: 	log(n)
+ * Stable: 	No
+*/
+void quick_sort(int* arr, int start_pos, int end_pos);
