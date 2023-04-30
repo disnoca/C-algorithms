@@ -5,7 +5,7 @@
 #include "sorting.h"
 #include "../wrapper_functions.h"
 
-#define ARRAY_LENGTH 100
+#define ARRAY_LENGTH 10000
 
 static int* get_randomized_int_array(int length) {
 	int* arr = Calloc(sizeof(int), length);
@@ -48,6 +48,14 @@ int test_merge_sort(int length) {
 	return is_sorted(arr, length);
 }
 
+int test_heap_sort(int length) {
+	int* arr = get_randomized_int_array(length);
+
+	heap_sort(arr, length);
+	
+	return is_sorted(arr, length);
+}
+
 int main(void) {
 	srand(time(NULL));
 	int length = ARRAY_LENGTH;
@@ -55,6 +63,7 @@ int main(void) {
 	printf("Insertion Sort: %d\n", test_insertion_sort(length));
 	printf("Bubble Sort: %d\n", test_bubble_sort(length));
 	printf("Merge Sort: %d\n", test_merge_sort(length));
+	printf("Heap Sort: %d\n", test_heap_sort(length));
 
 	return 0;
 }

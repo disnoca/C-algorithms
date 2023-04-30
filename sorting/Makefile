@@ -5,7 +5,8 @@ SOURCES := \
 ../wrapper_functions.c \
 insertion_sort/insertion_sort.c \
 bubble_sort/bubble_sort.c \
-merge_sort/merge_sort.c
+merge_sort/merge_sort.c \
+heap_sort/heap_sort.c \
 
 TARGET = sorting_tester
 

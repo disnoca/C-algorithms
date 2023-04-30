@@ -21,3 +21,11 @@ void bubble_sort(int* arr, int length);
  * Stable: 	Yes
 */
 void merge_sort(int* arr, int length);
+
+/* Best: 	n*log(n)
+ * Average: n*log(n)
+ * Worst: 	n*log(n)
+ * Memory: 	1
+ * Stable: 	No
+*/
+void heap_sort(int* arr, int length);
