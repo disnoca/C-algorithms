@@ -4,33 +4,46 @@
 #include "stack.h"
 #include "../../../wrapper_functions.h"
 
-int check_stack_integrity(Stack* stack) {
-    if(stack->size == 0) return 1;
+bool check_stack_integrity(Stack* stack) {
+    if(stack->size == 0) 
+		return true;
 
-    int stack_size = stack->size;
-    SNode* node = stack->tail;
-    for(int i = 0; i < stack_size; i++) {    // check all links
-        if(node == NULL) {
-            printf("assuming stack size (%d) is correct, prev links incomplete\n", stack_size);
-            return 0;
+    LLNode* curr_node = stack->head;
+    for(int i = 0; i < stack->size; i++) {    // check all next links
+        if(curr_node == NULL) {
+            printf("Assuming stack size (%d) is correct, next links incomplete.\n", stack->size);
+            return false;
         }
-        node = node->prev;
+        curr_node = curr_node->next;
     }
 
-    if(node != NULL) {
-        printf("assuming stack size (%d) is correct, extra elements after head\n", stack_size);
-        return 0;
+    if(curr_node != NULL) {
+        printf("Assuming stack size (%d) is correct, extra elements after tail.\n", stack->size);
+        return false;
     } 
+    
+    curr_node = stack->tail;
+    for(int i = stack->size-1; i >= 0; i--) { // check all prev links
+        if(curr_node == NULL) {
+            printf("Assuming stack size (%d) is correct, prev links incomplete.\n", stack->size);
+            return false;
+        }
+        curr_node = curr_node->prev;
+    }
 
-    return 1;
+    if(curr_node != NULL) {
+        printf("Assuming stack size (%d) is correct, extra elements before head.\n", stack->size);
+        return false;
+    }
+
+    return true;
 }
 
 void print_stack_contents(Stack* stack) {
-    int stack_size = stack->size;
-    SNode* node = stack->tail;
-    for(int i = 0; i < stack_size; i++) {
-        printf("%d ", node->data);
-        node = node->prev;
+    LLNode* curr_node = stack->head;
+    for(int i = 0; i < stack->size; i++) {
+        printf("%d ", curr_node->data);
+        curr_node = curr_node->next;
     }
     printf("\n");
 }
@@ -59,8 +72,7 @@ int test_stack_push() {
     test_score += stack->size == 3 ? 20000 : 0;
 
     check_stack_integrity(stack);
-    stack_clear(stack);
-    Free(stack);
+    stack_destroy(stack);
     return test_score;
 }
 
@@ -73,8 +85,7 @@ int test_stack_pop() {
     test_score += stack->size == 0 ? 1 : 0;
 
     check_stack_integrity(stack);
-    stack_clear(stack);
-    Free(stack);
+    stack_destroy(stack);
     return test_score;
 }
 
@@ -88,8 +99,7 @@ int test_stack_peek() {
     }
 
     check_stack_integrity(stack);
-    stack_clear(stack);
-    Free(stack);
+    stack_destroy(stack);
     return test_score;
 }
 
@@ -98,7 +108,7 @@ int main() {
     printf("stack_pop: %d\n", test_stack_pop());
     printf("stack_peek: %d\n", test_stack_peek());
 
-    printf("Malloc calls: %d\nFree calls: %d\n", malloc_calls, free_calls);
+    printf("\nMalloc calls: %d\nFree calls: %d\n", malloc_calls, free_calls);
 
     return 0;
 }

@@ -4,33 +4,46 @@
 #include "queue.h"
 #include "../../../wrapper_functions.h"
 
-int check_queue_integrity(Queue* queue) {
-    if(queue->size == 0) return 1;
+bool check_queue_integrity(Queue* queue) {
+    if(queue->size == 0) 
+		return true;
 
-    int queue_size = queue->size;
-    QNode* node = queue->head;
-    for(int i = 0; i < queue_size; i++) {    // check all links
-        if(node == NULL) {
-            printf("assuming queue size (%d) is correct, next links incomplete\n", queue_size);
-            return 0;
+    LLNode* curr_node = queue->head;
+    for(int i = 0; i < queue->size; i++) {    // check all next links
+        if(curr_node == NULL) {
+            printf("Assuming queue size (%d) is correct, next links incomplete.\n", queue->size);
+            return false;
         }
-        node = node->next;
+        curr_node = curr_node->next;
     }
 
-    if(node != NULL) {
-        printf("assuming queue size (%d) is correct, extra elements after tail\n", queue_size);
-        return 0;
+    if(curr_node != NULL) {
+        printf("Assuming queue size (%d) is correct, extra elements after tail.\n", queue->size);
+        return false;
     } 
+    
+    curr_node = queue->tail;
+    for(int i = queue->size-1; i >= 0; i--) { // check all prev links
+        if(curr_node == NULL) {
+            printf("Assuming queue size (%d) is correct, prev links incomplete.\n", queue->size);
+            return false;
+        }
+        curr_node = curr_node->prev;
+    }
 
-    return 1;
+    if(curr_node != NULL) {
+        printf("Assuming queue size (%d) is correct, extra elements before head.\n", queue->size);
+        return false;
+    }
+
+    return true;
 }
 
 void print_queue_contents(Queue* queue) {
-    int queue_size = queue->size;
-    QNode* node = queue->head;
-    for(int i = 0; i < queue_size; i++) {
-        printf("%d ", node->data);
-        node = node->next;
+    LLNode* curr_node = queue->head;
+    for(int i = 0; i < queue->size; i++) {
+        printf("%d ", curr_node->data);
+        curr_node = curr_node->next;
     }
     printf("\n");
 }
@@ -61,8 +74,7 @@ int test_queue_add() {
     test_score += queue->tail->data == 12 ? 2000000 : 0;
 
     check_queue_integrity(queue);
-    queue_clear(queue);
-    Free(queue);
+    queue_destroy(queue);
     return test_score;
 }
 
@@ -75,8 +87,7 @@ int test_queue_poll() {
     test_score += queue->size == 0 ? 1 : 0;
 
     check_queue_integrity(queue);
-    queue_clear(queue);
-    Free(queue);
+    queue_destroy(queue);
     return test_score;
 }
 
@@ -90,8 +101,7 @@ int test_queue_peek() {
     }
 
     check_queue_integrity(queue);
-    queue_clear(queue);
-    Free(queue);
+    queue_destroy(queue);
     return test_score;
 }
 

@@ -3,6 +3,7 @@ CFLAGS = -Wall -Wextra
 
 SOURCES = \
 ../../../wrapper_functions.c \
+../linked_list/linked_list.c \
 stack.c
 
 TARGET = stack_tester

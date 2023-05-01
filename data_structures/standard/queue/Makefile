@@ -3,6 +3,7 @@ CFLAGS = -Wall -Wextra
 
 SOURCES = \
 ../../../wrapper_functions.c \
+../linked_list/linked_list.c \
 queue.c
 
 TARGET = queue_tester
