@@ -3,15 +3,15 @@
 
 #include <stdlib.h>
 
-typedef struct Node Node;
+typedef struct LLNode LLNode;
 
-struct Node {
-    Node *prev, *next;
+struct LLNode {
+    LLNode *prev, *next;
     void* data;
 };
 
 typedef struct {
-    Node *head, *tail;
+    LLNode *head, *tail;
     int size;
     size_t data_size;
 } LinkedList;

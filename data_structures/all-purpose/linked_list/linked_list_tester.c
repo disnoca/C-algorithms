@@ -10,7 +10,7 @@ int check_list_integrity(LinkedList* list) {
     if(ll_is_empty(list)) return 1;
 
     int list_size = list->size;
-    Node* node = list->head;
+    LLNode* node = list->head;
     for(int i = 0; i < list_size; i++) {    // check all next links
         if(node == NULL) {
             printf("assuming list size (%d) is correct, next links incomplete\n", list_size);
@@ -43,7 +43,7 @@ int check_list_integrity(LinkedList* list) {
 
 void print_list_contents(LinkedList* list) {
     int list_size = list->size;
-    Node* node = list->head;
+    LLNode* node = list->head;
     for(int i = 0; i < list_size; i++) {
         printf("%d ", INT_CAST(node->data));
         node = node->next;

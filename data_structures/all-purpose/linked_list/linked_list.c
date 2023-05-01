@@ -16,8 +16,8 @@ LinkedList* ll_list_create(size_t data_size) {
 }
 
 static void list_clear_and_free_if(LinkedList* list, int to_free) {
-    Node* curr_node = list->head;
-    Node* prev_node;
+    LLNode* curr_node = list->head;
+    LLNode* prev_node;
 
     while(curr_node != NULL) {
         prev_node = curr_node;
@@ -61,12 +61,12 @@ int ll_is_empty(LinkedList* list) {
     return list->size == 0;
 }
 
-static void link_nodes(Node* node1, Node* node2) {
+static void link_nodes(LLNode* node1, LLNode* node2) {
     node1->next = node2;
     node2->prev = node1;
 }
 
-static Node* create_node_by(void* data, int data_size, int data_type) {
+static LLNode* create_node_by(void* data, int data_size, int data_type) {
     void* node_data = NULL;
     if(data_type == BY_VALUE) {
         node_data = Malloc(data_size);
@@ -75,17 +75,17 @@ static Node* create_node_by(void* data, int data_size, int data_type) {
     else if (data_type == BY_REFERENCE)
         node_data = data;
     
-    Node node = {NULL, NULL, node_data};
-    Node* nodep = (Node*) Malloc(sizeof(Node));
+    LLNode node = {NULL, NULL, node_data};
+    LLNode* nodep = (LLNode*) Malloc(sizeof(LLNode));
     *nodep = node;
     return nodep;
 }
 
-static Node* get_node(LinkedList* list, int index) {
+static LLNode* get_node(LinkedList* list, int index) {
     int list_size = list->size;
     if(index >= list->size) return NULL;
 
-    Node* curr_node;
+    LLNode* curr_node;
     if(index < list_size/2) {
         curr_node = list->head;
         for(int i = 0; i < index; i++)
@@ -101,7 +101,7 @@ static Node* get_node(LinkedList* list, int index) {
     return curr_node;
 }
 
-static void add_node(LinkedList* list, Node* node) {
+static void add_node(LinkedList* list, LLNode* node) {
     if(ll_is_empty(list))
         list->head = node;
     else
@@ -112,7 +112,7 @@ static void add_node(LinkedList* list, Node* node) {
 }
 
 // crashes the program if trying to add to an out of bounds position
-static void add_node_at(LinkedList* list, Node* node, int index) {
+static void add_node_at(LinkedList* list, LLNode* node, int index) {
     int list_size = list->size;
     
     if(index == list_size) {
@@ -125,7 +125,7 @@ static void add_node_at(LinkedList* list, Node* node, int index) {
         list->head = node;
     }
     else {
-        Node* target_node = get_node(list, index);
+        LLNode* target_node = get_node(list, index);
         link_nodes(target_node->prev, node);
         link_nodes(node, target_node);
     }
@@ -134,8 +134,8 @@ static void add_node_at(LinkedList* list, Node* node, int index) {
 }
 
 // crashes the program if trying to add to an out of bounds position
-static Node* remove_node(LinkedList* list, int index) {
-    Node* node = get_node(list, index);
+static LLNode* remove_node(LinkedList* list, int index) {
+    LLNode* node = get_node(list, index);
 
     if(index == 0) {
         list->head = node->next;
@@ -153,14 +153,14 @@ static Node* remove_node(LinkedList* list, int index) {
 }
 
 // crashes the program if trying to add to an out of bounds position
-static Node* set_node(LinkedList* list, Node* node, int index) {
+static LLNode* set_node(LinkedList* list, LLNode* node, int index) {
     int list_size = list->size;
     if(index == list_size) {
         add_node(list, node);
         return NULL;
     }
 
-    Node* target_node;
+    LLNode* target_node;
 
     if(index == 0) {
         target_node = list->head;
@@ -182,7 +182,7 @@ static Node* set_node(LinkedList* list, Node* node, int index) {
 }
 
 static void add_by(LinkedList* list, void* data, int data_type) {
-    Node* node = create_node_by(data, list->data_size, data_type);
+    LLNode* node = create_node_by(data, list->data_size, data_type);
     node->prev = list->tail;
     add_node(list, node);
 }
@@ -196,7 +196,7 @@ void ll_add_by_reference(LinkedList* list, void* data) {
 }
 
 static void add_by_at(LinkedList* list, void* data, int index, int data_type) {
-    Node* node = create_node_by(data, list->data_size, data_type);
+    LLNode* node = create_node_by(data, list->data_size, data_type);
     add_node_at(list, node, index);
 }
 
@@ -209,8 +209,8 @@ void ll_add_by_reference_at(LinkedList* list, void* data, int index) {
 }
 
 static void* set_by_and_free_if(LinkedList* list, void* data, int index, int data_type, int to_free) {
-    Node* new_node = create_node_by(data, list->data_size, data_type);
-    Node* old_node = set_node(list, new_node, index);
+    LLNode* new_node = create_node_by(data, list->data_size, data_type);
+    LLNode* old_node = set_node(list, new_node, index);
 
     // is only true if index was the list's size, meaning the set acted as an append
     if(old_node == NULL) return NULL;    
@@ -249,7 +249,7 @@ void* ll_get(LinkedList* list, int index) {
 
 static int index_of(LinkedList* list, void* data, int data_type) {
     int list_size = list->size;
-    Node* node = list->head;
+    LLNode* node = list->head;
 
     if(data_type == BY_VALUE) {
         int data_size = list->data_size;
@@ -279,7 +279,7 @@ int ll_index_of_reference(LinkedList* list, void* data) {
 
 static int last_index_of(LinkedList* list, void* data, int data_type) {
     int list_size = list->size;
-    Node* node = list->tail;
+    LLNode* node = list->tail;
 
     if(data_type == BY_VALUE) {
         int data_size = list->data_size;
@@ -308,7 +308,7 @@ int ll_last_index_of_reference(LinkedList* list, void* data) {
 }
 
 static void* remove_and_free_if(LinkedList* list, int index, int to_free) {
-    Node* node = remove_node(list, index);
+    LLNode* node = remove_node(list, index);
     void* data = node->data;
     Free(node);
 
@@ -368,7 +368,7 @@ static int contains_all(LinkedList* list, LinkedList* comp_list, int data_type) 
     if(comp_list_size == 0) return 1;
     if(list->size == 0) return 0;
 
-    Node* comp_node = comp_list->head;
+    LLNode* comp_node = comp_list->head;
     for(int i = 0; i < comp_list_size; i++) {
         if(!contains(list, comp_node->data, data_type))
             return 0;
@@ -391,7 +391,7 @@ static void add_all_by(LinkedList* dest_list, LinkedList* source_list, int data_
     int data_size = source_list->data_size;
 
     // first iteration must be done outside for this algorithm to work in case dest_list is empty
-    Node* start_node = create_node_by(source_list->head->data, data_size, data_type);
+    LLNode* start_node = create_node_by(source_list->head->data, data_size, data_type);
     if(ll_is_empty(dest_list))
         dest_list->head = start_node;
     else
@@ -399,9 +399,9 @@ static void add_all_by(LinkedList* dest_list, LinkedList* source_list, int data_
     dest_list->tail = start_node;
 
     int source_list_size = source_list->size;
-    Node* curr_node = source_list->head->next;
+    LLNode* curr_node = source_list->head->next;
     for(int i = 1; i < source_list_size; i++) {
-        Node* node = create_node_by(curr_node->data, data_size, data_type);
+        LLNode* node = create_node_by(curr_node->data, data_size, data_type);
         link_nodes(dest_list->tail, node);
         dest_list->tail = node;
         curr_node = curr_node->next;
@@ -428,9 +428,9 @@ static void add_all_by_at(LinkedList* dest_list, LinkedList* source_list, int in
 
     // first iteration must be done outside for this algorithm to work in case index is 0
     int data_size = source_list->data_size;
-    Node* next_node = get_node(dest_list, index);
-    Node* prev_node = next_node->prev;
-    Node* first_node = create_node_by(source_list->head->data, data_size, data_type);
+    LLNode* next_node = get_node(dest_list, index);
+    LLNode* prev_node = next_node->prev;
+    LLNode* first_node = create_node_by(source_list->head->data, data_size, data_type);
     if(index == 0) {
         link_nodes(first_node, dest_list->head);
         dest_list->head = first_node;
@@ -439,9 +439,9 @@ static void add_all_by_at(LinkedList* dest_list, LinkedList* source_list, int in
         link_nodes(prev_node, first_node);
     prev_node = first_node;
 
-    Node* curr_node = source_list->head->next;
+    LLNode* curr_node = source_list->head->next;
     for(int i = 1; i < source_list_size; i++) {
-        Node* node = create_node_by(curr_node->data, data_size, data_type);
+        LLNode* node = create_node_by(curr_node->data, data_size, data_type);
         link_nodes(prev_node, node);
         prev_node = node;
         curr_node = curr_node->next;
@@ -464,7 +464,7 @@ static int remove_all_by_and_free_if(LinkedList* dest_list, LinkedList* source_l
 
     if(original_dest_list_size == 0 || source_list_size == 0) return 0;
 
-    Node* node = source_list->head;
+    LLNode* node = source_list->head;
     for(int i = 0; i < source_list_size; i++) {
         remove_by_and_free_if(dest_list, node->data, data_type, to_free);
         node = node->next;
@@ -494,7 +494,7 @@ static int retain_all_by_and_free_if(LinkedList* dest_list, LinkedList* source_l
         return 1;
     }
 
-    Node* node = dest_list->tail;
+    LLNode* node = dest_list->tail;
     for(int i = original_dest_list_size-1; i >= 0; i--) {
         if(!contains(source_list, node->data, data_type))
             remove_and_free_if(dest_list, i, to_free);
@@ -526,7 +526,7 @@ static LinkedList* sublist(LinkedList* source_list, int from_index, int to_index
 
     LinkedList* sublist = ll_list_create(source_list->data_size);
 
-    Node* curr_node = get_node(source_list, from_index);
+    LLNode* curr_node = get_node(source_list, from_index);
     for(int i = from_index; i < to_index; i++) {
         add_by(sublist, curr_node->data, data_type);
         curr_node = curr_node->next;
@@ -550,7 +550,7 @@ void* ll_to_array(LinkedList* list) {
 
     void* array_head = Malloc(data_size * list_size);
 
-    Node* curr_node = list->head;
+    LLNode* curr_node = list->head;
     for(int i = 0; i < list_size; i++) {
         memcpy(array_head + i*data_size, curr_node->data, data_size);
         curr_node = curr_node->next;
@@ -559,15 +559,15 @@ void* ll_to_array(LinkedList* list) {
     return array_head;
 }
 
-static void swap_nodes(Node* node1, Node* node2) {
+static void swap_nodes(LLNode* node1, LLNode* node2) {
     void* temp_data = node1->data;
     node1->data = node2->data;
     node2->data = temp_data;
 }
 
 void ll_swap(LinkedList* list, int index1, int index2) {
-    Node* node1 = get_node(list, index1);
-    Node* node2 = get_node(list, index2);
+    LLNode* node1 = get_node(list, index1);
+    LLNode* node2 = get_node(list, index2);
     swap_nodes(node1, node2);
 }
 
@@ -576,7 +576,7 @@ void ll_sort(LinkedList* list, int compare(void*, void*)) {
     int list_size = list->size;
     if(list_size <= 1) return;
 
-    Node* curr_node;
+    LLNode* curr_node;
     for(int i = 0; i < list_size; i++) {
         curr_node = list->tail;
 		for(int j = list_size-1; j > i; j--) {
@@ -590,8 +590,8 @@ void ll_sort(LinkedList* list, int compare(void*, void*)) {
 void ll_reverse(LinkedList* list) {
     int half_list_size = list->size/2;
 
-    Node* node1 = list->head;
-    Node* node2 = list->tail;
+    LLNode* node1 = list->head;
+    LLNode* node2 = list->tail;
     for(int i = 0; i < half_list_size; i++) {
         swap_nodes(node1, node2);
         node1 = node1->next;
@@ -602,7 +602,7 @@ void ll_reverse(LinkedList* list) {
 void ll_for_each(LinkedList* list, void func(void*)) {
     int list_size = list->size;
 
-    Node* curr_node = list->head;
+    LLNode* curr_node = list->head;
     for(int i = 0; i < list_size; i++) {
         func(curr_node->data);
         curr_node = curr_node->next;
@@ -613,7 +613,7 @@ int ll_hash_code(LinkedList* list) {
     int hash_code = 0;
     int list_size = list->size;
     
-    Node* curr_node = list->head;
+    LLNode* curr_node = list->head;
     for(int i = 0; i < list_size; i++) {
         hash_code += (intptr_t) curr_node->data;
         curr_node = curr_node->next;
