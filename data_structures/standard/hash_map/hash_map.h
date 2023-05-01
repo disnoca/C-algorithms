@@ -33,6 +33,6 @@ value_type hm_replace(HashMap* hash_map, char* key, value_type value);
 
 void hm_clear(HashMap* hash_map);
 
-void hm_free(HashMap* hash_map);
+void hm_destroy(HashMap* hash_map);
 
 #endif

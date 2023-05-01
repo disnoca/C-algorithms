@@ -155,7 +155,8 @@ void hm_clear(HashMap* hash_map) {
     hash_map->size = 0;
 }
 
-void hm_free(HashMap* hash_map) {
+void hm_destroy(HashMap* hash_map) {
+    hm_clear(hash_map);
     Free(hash_map->buckets);
     Free(hash_map);
 }

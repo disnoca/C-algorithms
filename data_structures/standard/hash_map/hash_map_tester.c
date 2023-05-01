@@ -57,7 +57,7 @@ int test_put_get() {
     test_score += hash_map->size == 10 ? 2000000000 : 0;
 
     hm_clear(hash_map);
-    hm_free(hash_map);
+    hm_destroy(hash_map);
     return test_score;
 }
 
@@ -80,7 +80,7 @@ int test_rehash() {
     test_score += hash_map->capacity == 32 ? 200000 : 0;
     
     hm_clear(hash_map);
-    hm_free(hash_map);
+    hm_destroy(hash_map);
     return test_score;
 }
 
@@ -94,7 +94,7 @@ int test_remove() {
     test_score += hash_map->size == 7 ? 2000 : 0;
 
     hm_clear(hash_map);
-    hm_free(hash_map);
+    hm_destroy(hash_map);
     return test_score;
 }
 
@@ -111,7 +111,7 @@ int test_replace() {
     test_score += hash_map->size == 10 ? 2000000 : 0;
 
     hm_clear(hash_map);
-    hm_free(hash_map);
+    hm_destroy(hash_map);
     return test_score;
 }
 
@@ -126,7 +126,7 @@ int test_clear() {
             test_score++;
     test_score += 10;
 
-    hm_free(hash_map);
+    hm_destroy(hash_map);
     return test_score;
 }
 
