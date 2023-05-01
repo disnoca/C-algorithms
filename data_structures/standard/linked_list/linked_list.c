@@ -94,10 +94,12 @@ data_type ll_remove_first(LinkedList* list) {
 	LLNode* node = list->head;
 	data_type data = node->data;
 
-	list->head = node->next;
-	list->head->prev = NULL;
+	if(list->size > 1) {
+		list->head = node->next;
+		list->head->prev = NULL;
+	}
+
 	list->size--;
-	
 	Free(node);
 	return data;
 }
@@ -106,10 +108,12 @@ data_type ll_remove_last(LinkedList* list) {
 	LLNode* node = list->tail;
 	data_type data = node->data;
 
-	list->tail = node->prev;
-	list->tail->next = NULL;
-	list->size--;
+	if(list->size > 1) {
+		list->tail = node->prev;
+		list->tail->next = NULL;
+	}
 
+	list->size--;
 	Free(node);
 	return data;
 }

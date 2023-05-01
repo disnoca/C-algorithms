@@ -47,7 +47,7 @@ void print_list_contents(LinkedList* list) {
     printf("\n");
 }
 
-LinkedList* list_create_with_ascending_ints(int size) {   // dependent on add()'s functionality
+LinkedList* list_create_with_ascending_ints(int size) {
     LinkedList* list = ll_create();
     for(int i = 0; i < size; i++)
         ll_add(list, i);
@@ -127,8 +127,17 @@ int test_remove_at() {
     test_score += ll_remove_last(list)==8 ? 10000000 : 0;
     test_score += list->size==5 ? 200000000 : 0;
 
+    LinkedList* list2 = list_create_with_ascending_ints(0);
+    ll_add(list2, 1);
+    ll_remove_at(list2, 0);
+    ll_add(list2, 1);
+    ll_remove_first(list2);
+    ll_add(list2, 1);
+    ll_remove_last(list2);
+
     check_list_integrity(list);
     ll_destroy(list);
+    ll_destroy(list2);
     return test_score;
 }
 
@@ -146,8 +155,13 @@ int test_remove() {
     test_score += ll_get(list, 6)==8 ? 10000000 : 0;
     test_score += list->size==7 ? 200000000 : 0;
 
+    LinkedList* list2 = list_create_with_ascending_ints(0);
+    ll_add(list2, 1);
+    ll_remove(list2, 1);
+
     check_list_integrity(list);
     ll_destroy(list);
+    ll_destroy(list2);
     return test_score;
 }
 

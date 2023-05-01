@@ -19,6 +19,9 @@ typedef struct {
     int size;
 } LinkedList;
 
+typedef LinkedList Queue;
+typedef LinkedList Stack;
+
 /* ---------------- Functions ---------------- */
 
 LinkedList* ll_create();
