@@ -34,4 +34,6 @@ int avlt_contains(AVLTree* tree, data_type data);
 
 void avlt_clear();
 
+void avlt_destroy();
+
 #endif

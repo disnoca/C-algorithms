@@ -342,3 +342,8 @@ void avlt_clear(AVLTree* tree) {
 
     tree->size = 0;
 }
+
+void avlt_destroy(AVLTree* tree) {
+    avlt_clear(tree);
+    Free(tree);
+}
