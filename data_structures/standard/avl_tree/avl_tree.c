@@ -336,7 +336,6 @@ void avlt_clear(AVLTree* tree) {
         if(curr_node->right != NULL)
             nodes[i++] = curr_node->right;
 
-        printf("freeing %d\n", curr_node->data);
         Free(curr_node);
     }  while(j < i);
 
