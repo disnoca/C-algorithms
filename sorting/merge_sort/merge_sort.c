@@ -24,9 +24,9 @@ void merge_sort(int* arr, int length) {
 	int mid_pos = length/2;
 
 	int left_length = mid_pos;
-	int* left_arr = Calloc(sizeof(int), left_length);
+	int* left_arr = Malloc(sizeof(int) * left_length);
 	int right_length = length - mid_pos;
-	int* right_arr = Calloc(sizeof(int), right_length);
+	int* right_arr = Malloc(sizeof(int) * right_length);
 	
 	for(int i = 0; i < mid_pos; i++)
 		left_arr[i] = arr[i];

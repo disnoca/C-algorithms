@@ -8,7 +8,7 @@
 #define ARRAY_LENGTH 10000
 
 static int* get_randomized_int_array(int length) {
-	int* arr = Calloc(sizeof(int), length);
+	int* arr = Malloc(sizeof(int) * length);
 
 	for(int i = 0; i < length; i++)
 		arr[i] = rand();
