@@ -1,5 +1,5 @@
-#include "../sorting.h"
-#include "../helper_functions.h"
+#include "sorting.h"
+#include "helper_functions.h"
 
 void insertion_sort(int* arr, int length) {
 	for(int i = 1; i < length; i++)

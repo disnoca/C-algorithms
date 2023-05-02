@@ -1,5 +1,5 @@
-#include "../sorting.h"
-#include "../helper_functions.h"
+#include "sorting.h"
+#include "helper_functions.h"
 
 static int partition(int* arr, int start_pos, int end_pos) {
 	int pivot = arr[end_pos];

@@ -1,5 +1,5 @@
-#include "../sorting.h"
-#include "../helper_functions.h"
+#include "sorting.h"
+#include "helper_functions.h"
 
 static void heapify(int* arr, int length, int root_pos) {
 	int largest_pos = root_pos;
