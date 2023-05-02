@@ -1,3 +1,6 @@
+#ifndef SORTING
+#define SORTING
+
 /* Best: 	n
  * Average: n^2
  * Worst: 	n^2
@@ -45,3 +48,5 @@ void heap_sort(int* arr, int length);
  * Stable: 	No
 */
 void quick_sort(int* arr, int start_pos, int end_pos);
+
+#endif
