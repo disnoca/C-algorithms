@@ -24,6 +24,12 @@ static bool is_sorted(int* arr, int length) {
 	return true;
 }
 
+static void print_array(int* arr, int length) {
+	for(int i = 0; i < length; i++)
+		printf("%d ", arr[i]);
+	printf("\n");
+}
+
 int test_insertion_sort(int length) {
 	int* arr = get_randomized_int_array(length);
 
