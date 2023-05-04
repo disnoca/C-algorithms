@@ -34,11 +34,11 @@ static int partition(int* arr, int start_pos, int end_pos) {
     return i;
 }
 
-void quick_sort(int* arr, int start_pos, int end_pos) {
+void quicksort(int* arr, int start_pos, int end_pos) {
 	if(start_pos >= end_pos) return;
 	
 	int partition_pos = partition(arr, start_pos, end_pos);
 	
-	quick_sort(arr, start_pos, partition_pos-1);
-	quick_sort(arr, partition_pos+1, end_pos);
+	quicksort(arr, start_pos, partition_pos-1);
+	quicksort(arr, partition_pos+1, end_pos);
 }

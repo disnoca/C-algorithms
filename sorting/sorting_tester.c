@@ -80,20 +80,20 @@ int test_in_place_merge_sort(int length) {
 	return result;
 }
 
-int test_heap_sort(int length) {
+int test_heapsort(int length) {
 	int* arr = get_randomized_int_array(length);
 
-	heap_sort(arr, length);
+	heapsort(arr, length);
 	
 	bool result = is_sorted(arr, length);
 	Free(arr);
 	return result;
 }
 
-int test_quick_sort(int length) {
+int test_quicksort(int length) {
 	int* arr = get_randomized_int_array(length);
 
-	quick_sort(arr, 0, length-1);
+	quicksort(arr, 0, length-1);
 	
 	bool result = is_sorted(arr, length);
 	Free(arr);
@@ -109,8 +109,8 @@ int main(void) {
 	printf("Selection Sort: %d\n", test_selection_sort(length));
 	printf("Merge Sort: %d\n", test_merge_sort(length));
 	printf("In-Place Merge Sort: %d\n", test_in_place_merge_sort(length));
-	printf("Heap Sort: %d\n", test_heap_sort(length));
-	printf("Quick Sort: %d\n", test_quick_sort(length));
+	printf("Heap Sort: %d\n", test_heapsort(length));
+	printf("Quick Sort: %d\n", test_quicksort(length));
 
 	return 0;
 }

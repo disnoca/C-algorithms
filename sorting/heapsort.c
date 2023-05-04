@@ -17,7 +17,7 @@ static void heapify(int* arr, int length, int root_pos) {
 	}
 }
 
-void heap_sort(int* arr, int length) {
+void heapsort(int* arr, int length) {
 	for (int i = length/2-1; i >= 0; i--)		// build max heap by heapifying all non-leaf nodes 
         heapify(arr, length, i);
 	
