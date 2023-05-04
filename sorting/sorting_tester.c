@@ -100,6 +100,16 @@ int test_quicksort(int length) {
 	return result;
 }
 
+int test_introsort(int length) {
+	int* arr = get_randomized_int_array(length);
+
+	introsort(arr, length);
+	
+	bool result = is_sorted(arr, length);
+	Free(arr);
+	return result;
+}
+
 int main(void) {
 	srand(time(NULL));
 	int length = ARRAY_LENGTH;
@@ -109,8 +119,9 @@ int main(void) {
 	printf("Selection Sort: %d\n", test_selection_sort(length));
 	printf("Merge Sort: %d\n", test_merge_sort(length));
 	printf("In-Place Merge Sort: %d\n", test_in_place_merge_sort(length));
-	printf("Heap Sort: %d\n", test_heapsort(length));
-	printf("Quick Sort: %d\n", test_quicksort(length));
+	printf("Heapsort: %d\n", test_heapsort(length));
+	printf("Quicksort: %d\n", test_quicksort(length));
+	printf("Introsort: %d\n", test_introsort(length));
 
 	return 0;
 }

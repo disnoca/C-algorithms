@@ -11,6 +11,7 @@ merge_sort.c \
 in_place_merge_sort.c \
 heapsort.c \
 quicksort.c \
+introsort.c \
 
 TARGET = sorting_tester
 

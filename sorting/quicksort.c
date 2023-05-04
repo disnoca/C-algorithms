@@ -19,7 +19,7 @@ static void prepare_pivot(int* arr, int start_pos, int end_pos) {
 		swap(arr, mid_pos, end_pos);
 }
 
-static int partition(int* arr, int start_pos, int end_pos) {
+int partition(int* arr, int start_pos, int end_pos) {
 	prepare_pivot(arr, start_pos, end_pos);
 	int pivot = arr[end_pos];
 

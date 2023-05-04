@@ -65,4 +65,10 @@ void quicksort(int* arr, int start_pos, int end_pos);
 */
 void introsort(int* arr, int length);
 
+
+/* Subroutines */
+
+/* Quicksort's partitioning function. */
+int partition(int* arr, int start_pos, int end_pos);
+
 #endif
