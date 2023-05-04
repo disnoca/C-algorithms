@@ -6,7 +6,7 @@ SOURCES := \
 linear_search.c \
 binary_search.c
 
-TARGET = search_tester
+TARGET = searching_tester
 
 all: $(TARGET)
 

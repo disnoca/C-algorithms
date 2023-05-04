@@ -3,7 +3,7 @@
 #include <stdbool.h>
 #include <time.h>
 #include "../wrapper_functions.h"
-#include "search.h"
+#include "searching.h"
 
 #define ARRAY_LENGTH 10000
 
