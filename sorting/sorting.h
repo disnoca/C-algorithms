@@ -35,6 +35,14 @@ void merge_sort(int* arr, int length);
 
 /* Best: 	n*log(n)
  * Average: n*log(n)
+ * Worst: 	n*log^2(n)
+ * Memory: 	1
+ * Stable: 	Yes
+*/
+void in_place_merge_sort(int* arr, int left_pos, int right_pos);
+
+/* Best: 	n*log(n)
+ * Average: n*log(n)
  * Worst: 	n*log(n)
  * Memory: 	1
  * Stable: 	No
