@@ -18,7 +18,7 @@ static void heapify(int* arr, int length, int root_pos) {
 		largest_pos = right_pos;
 	
 	if(largest_pos != root_pos) {
-		swap(arr, root_pos, largest_pos);
+		swap(arr+root_pos, arr+largest_pos);
 		heapify(arr, length, largest_pos);
 	}
 }
@@ -29,7 +29,7 @@ void heap_sort(int* arr, int length) {
 	
 	int unsorted_size = length;
 	while(unsorted_size-- > 1) {				// add the root to the sorted partition
-		swap(arr, 0, unsorted_size);
+		swap(arr, arr+unsorted_size);
 		heapify(arr, unsorted_size, 0);
 	}
 }

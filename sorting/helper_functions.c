@@ -1,7 +1,7 @@
 #include "helper_functions.h"
 
-void swap(int* arr, int pos1, int pos2) {
-	int temp = arr[pos1];
-	arr[pos1] = arr[pos2];
-	arr[pos2] = temp;
+void swap(int* pos1, int* pos2) {
+	int temp = *pos1;
+	*pos1 = *pos2;
+	*pos2 = temp;
 }

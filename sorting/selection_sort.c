@@ -16,6 +16,6 @@ void selection_sort(int* arr, int length) {
 				current_min_pos = j;
 
 		if(i != current_min_pos) 
-			swap(arr, i, current_min_pos);
+			swap(arr+i, arr+current_min_pos);
 	}
 }

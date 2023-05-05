@@ -12,11 +12,11 @@ static void prepare_pivot(int* arr, int start_pos, int end_pos) {
 	int mid_pos = (start_pos + end_pos) / 2;
 
 	if(arr[mid_pos] < arr[start_pos])
-		swap(arr, start_pos, mid_pos);
+		swap(arr+start_pos, arr+mid_pos);
 	if(arr[end_pos] < arr[start_pos])
-		swap(arr, start_pos, end_pos);
+		swap(arr+start_pos, arr+end_pos);
 	if(arr[mid_pos] < arr[end_pos])
-		swap(arr, mid_pos, end_pos);
+		swap(arr+mid_pos, arr+end_pos);
 }
 
 int partition(int* arr, int start_pos, int end_pos) {
@@ -27,9 +27,9 @@ int partition(int* arr, int start_pos, int end_pos) {
 
     for (int j = start_pos; j < end_pos; j++)
         if (arr[j] < pivot)
-			swap(arr, i++, j);
+			swap(arr+i++, arr+j);
 
-    swap(arr, i, end_pos);
+    swap(arr+i, arr+end_pos);
 
     return i;
 }

@@ -1,1 +1,1 @@
-void swap(int* arr, int pos1, int pos2);
+void swap(int* pos1, int* pos2);
