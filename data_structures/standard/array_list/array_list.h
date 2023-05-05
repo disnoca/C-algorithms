@@ -7,7 +7,7 @@ typedef int data_type;
 
 typedef struct {
 	data_type* arr;
-	int curr_size, max_size;
+	int size, capacity;
 } ArrayList;
 
 /* ---------------- Functions ---------------- */

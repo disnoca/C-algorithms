@@ -4,7 +4,7 @@
 #include "../../../wrapper_functions.h"
 
 void print_list_contents(ArrayList* list) {
-    for(int i = 0; i < list->curr_size; i++)
+    for(int i = 0; i < list->size; i++)
         printf("%d ", list->arr[i]);
     printf("\n");
 }
@@ -26,8 +26,8 @@ int test_add() {
 	test_score += list->arr[0]==0 ? 1 : 0;
 	test_score += list->arr[5]==5 ? 10 : 0;
 	test_score += list->arr[10]==10 ? 100 : 0;
-	test_score += list->curr_size==11 ? 1000 : 0;
-	test_score += list->max_size==20 ? 20000 : 0;
+	test_score += list->size==11 ? 1000 : 0;
+	test_score += list->capacity==20 ? 20000 : 0;
     
     al_destroy(list);
     return test_score;
@@ -46,8 +46,8 @@ int test_add_at() {
 	test_score += list->arr[7]==5 ? 1000 : 0;
 	test_score += list->arr[11]==9 ? 10000 : 0;
 	test_score += list->arr[12]==10 ? 100000 : 0;
-	test_score += list->curr_size==13 ? 1000000 : 0;
-	test_score += list->max_size==20 ? 20000000 : 0;
+	test_score += list->size==13 ? 1000000 : 0;
+	test_score += list->capacity==20 ? 20000000 : 0;
     
     al_destroy(list);
     return test_score;
@@ -76,9 +76,9 @@ int test_remove_at() {
 	test_score += al_get(list, 0)==1 ? 10000 : 0;
 	test_score += al_get(list, 3)==5 ? 100000 : 0;
 	test_score += al_get(list, 5)==7 ? 1000000 : 0;
-	test_score += list->curr_size==6 ? 20000000 : 0;
+	test_score += list->size==6 ? 20000000 : 0;
 
-	while(list->curr_size > 0)
+	while(list->size > 0)
 		al_remove_last(list);
     
     al_destroy(list);
@@ -95,7 +95,7 @@ int test_remove() {
 	test_score += al_get(list, 0)==1 ? 1000 : 0;
 	test_score += al_get(list, 4)==6 ? 10000 : 0;
 	test_score += al_get(list, 8)==8 ? 100000 : 0;
-	test_score += list->curr_size==7 ? 2000000 : 0;
+	test_score += list->size==7 ? 2000000 : 0;
     
     al_destroy(list);
     return test_score;

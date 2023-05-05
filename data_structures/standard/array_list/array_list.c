@@ -3,10 +3,12 @@
 #include "array_list.h"
 #include "../../../wrapper_functions.h"
 
+/* Helper Functions */
+
 static void resize(ArrayList* list) {
-	int old_max_size = list->max_size;
-	list->max_size *= 2;
-	data_type* new_arr = (data_type*) Malloc(sizeof(data_type) * list->max_size);
+	int old_max_size = list->capacity;
+	list->capacity *= 2;
+	data_type* new_arr = (data_type*) Malloc(sizeof(data_type) * list->capacity);
 
 	for(int i = 0; i < old_max_size; i++)
 		new_arr[i] = list->arr[i];
@@ -15,55 +17,53 @@ static void resize(ArrayList* list) {
 	list->arr = new_arr;
 }
 
-/* Helper Functions */
-
-/* Header Implementations */
+/* Header Implementation */
 
 ArrayList* al_create(int size) {
 	ArrayList* list =  (ArrayList*) Malloc(sizeof(ArrayList));
 
 	list->arr = (data_type*) Malloc(sizeof(data_type) * size);
-	list->curr_size = 0;
-	list->max_size = size;
+	list->size = 0;
+	list->capacity = size;
 
 	return list;
 }
 
 void al_add(ArrayList* list, data_type data) {
-	if(list->curr_size >= list->max_size)
+	if(list->size >= list->capacity)
 		resize(list);
 
-	list->arr[list->curr_size++] = data;
+	list->arr[list->size++] = data;
 }
 
 void al_add_at(ArrayList* list, data_type data, int pos) {
-	if(pos == list->curr_size) {
+	if(pos == list->size) {
 		al_add(list, data);
 		return;
 	}
 
-	if(list->curr_size == list->max_size)
+	if(list->size == list->capacity)
 		resize(list);
 
-	for(int i = list->curr_size; i > pos; i--)
+	for(int i = list->size; i > pos; i--)
 		list->arr[i] = list->arr[i-1];
 
 	list->arr[pos] = data;
-	list->curr_size++;
+	list->size++;
 }
 
 data_type al_remove_last(ArrayList* list) {
-	return list->arr[--list->curr_size];
+	return list->arr[--list->size];
 }
 
 data_type al_remove_at(ArrayList* list, int pos) {
-	if(pos == list->curr_size-1)
+	if(pos == list->size-1)
 		return al_remove_last(list);
 
 	data_type data = list->arr[pos];
 
-	list->curr_size--;
-	for(int i = pos; i < list->curr_size; i++)
+	list->size--;
+	for(int i = pos; i < list->size; i++)
 		list->arr[i] = list->arr[i+1];
 
 	return data;
@@ -89,7 +89,7 @@ data_type al_set(ArrayList* list, data_type data, int pos) {
 }
 
 int al_index_of(ArrayList* list, data_type data) {
-	for(int i = 0; i < list->curr_size; i++)
+	for(int i = 0; i < list->size; i++)
 		if(list->arr[i] == data)
 			return i;
 
@@ -101,7 +101,7 @@ bool al_contains(ArrayList* list, data_type data) {
 }
 
 void al_clear(ArrayList* list) {
-	list->curr_size = 0;
+	list->size = 0;
 }
 
 void al_destroy(ArrayList* list) {
