@@ -1,6 +1,14 @@
 #ifndef SORTING
 #define SORTING
 
+/* Subroutines */
+
+/* Quick Sort's partitioning function. */
+int partition(int* arr, int start_pos, int end_pos);
+
+
+/* Sorting Algorithms */
+
 /* Best: 	n
  * Average: n^2
  * Worst: 	n^2
@@ -39,7 +47,7 @@ void merge_sort(int* arr, int length);
  * Memory: 	1
  * Stable: 	No
 */
-void heapsort(int* arr, int length);
+void heap_sort(int* arr, int length);
 
 /* Best: 	n*log(n)
  * Average: n*log(n)
@@ -47,7 +55,7 @@ void heapsort(int* arr, int length);
  * Memory: 	log(n)
  * Stable: 	No
 */
-void quicksort(int* arr, int start_pos, int end_pos);
+void quick_sort(int* arr, int start_pos, int end_pos);
 
 /* Best: 	n*log(n)
  * Average: n*log(n)
@@ -55,12 +63,6 @@ void quicksort(int* arr, int start_pos, int end_pos);
  * Memory: 	log(n)
  * Stable: 	No
 */
-void introsort(int* arr, int length);
-
-
-/* Subroutines */
-
-/* Quicksort's partitioning function. */
-int partition(int* arr, int start_pos, int end_pos);
+void intro_sort(int* arr, int length);
 
 #endif

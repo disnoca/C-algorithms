@@ -1,5 +1,5 @@
 /**
- * Introsort sorting algorithm implementation.
+ * Intro Sort sorting algorithm implementation.
  * 
  * @author Samuel Pires
 */
@@ -11,7 +11,7 @@ static void sort(int* arr, int length, int max_depth) {
 	if(length < 16)
 		insertion_sort(arr, length);
 	else if(max_depth == 0)
-		heapsort(arr, length);
+		heap_sort(arr, length);
 	else {
 		int pivot_pos = partition(arr, 0, length-1);
 		sort(arr, pivot_pos, max_depth-1);
@@ -19,7 +19,7 @@ static void sort(int* arr, int length, int max_depth) {
 	}
 }
 
-void introsort(int* arr, int length) {
+void intro_sort(int* arr, int length) {
 	int max_depth = 2 * log2(length);
 	sort(arr, length, max_depth);
 }

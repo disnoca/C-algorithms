@@ -70,30 +70,30 @@ int test_merge_sort(int length) {
 	return result;
 }
 
-int test_heapsort(int length) {
+int test_heap_sort(int length) {
 	int* arr = get_randomized_int_array(length);
 
-	heapsort(arr, length);
+	heap_sort(arr, length);
 	
 	bool result = is_sorted(arr, length);
 	Free(arr);
 	return result;
 }
 
-int test_quicksort(int length) {
+int test_quick_sort(int length) {
 	int* arr = get_randomized_int_array(length);
 
-	quicksort(arr, 0, length-1);
+	quick_sort(arr, 0, length-1);
 	
 	bool result = is_sorted(arr, length);
 	Free(arr);
 	return result;
 }
 
-int test_introsort(int length) {
+int test_intro_sort(int length) {
 	int* arr = get_randomized_int_array(length);
 
-	introsort(arr, length);
+	intro_sort(arr, length);
 	
 	bool result = is_sorted(arr, length);
 	Free(arr);
@@ -108,9 +108,9 @@ int main(void) {
 	printf("Bubble Sort: %d\n", test_bubble_sort(length));
 	printf("Selection Sort: %d\n", test_selection_sort(length));
 	printf("Merge Sort: %d\n", test_merge_sort(length));
-	printf("Heapsort: %d\n", test_heapsort(length));
-	printf("Quicksort: %d\n", test_quicksort(length));
-	printf("Introsort: %d\n", test_introsort(length));
+	printf("Heap Sort: %d\n", test_heap_sort(length));
+	printf("Quick Sort: %d\n", test_quick_sort(length));
+	printf("Intro Sort: %d\n", test_intro_sort(length));
 
 	return 0;
 }

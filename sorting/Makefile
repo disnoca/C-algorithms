@@ -8,10 +8,9 @@ insertion_sort.c \
 bubble_sort.c \
 selection_sort.c \
 merge_sort.c \
-in_place_merge_sort.c \
-heapsort.c \
-quicksort.c \
-introsort.c \
+heap_sort.c \
+quick_sort.c \
+intro_sort.c
 
 TARGET = sorting_tester
 

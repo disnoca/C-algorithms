@@ -1,5 +1,5 @@
 /**
- * Quicksort sorting algorithm implementation.
+ * Quick Sort sorting algorithm implementation.
  * 
  * @author Samuel Pires
 */
@@ -8,20 +8,14 @@
 #include "sorting.h"
 #include "helper_functions.h"
 
-static bool is_between(int value, int bound1, int bound2) {
-	return (value > bound1 && value < bound2) || (value > bound2 && value < bound1);
-}
-
 static void prepare_pivot(int* arr, int start_pos, int end_pos) {
-	int mid_pos = end_pos / 2;
+	int mid_pos = (start_pos + end_pos) / 2;
 
-	int start_candidate = arr[start_pos];
-	int mid_candidate = arr[mid_pos];
-	int end_candidate = arr[end_pos];
-
-	if(is_between(start_candidate, mid_candidate, end_candidate))
+	if(arr[mid_pos] < arr[start_pos])
+		swap(arr, start_pos, mid_pos);
+	if(arr[end_pos] < arr[start_pos])
 		swap(arr, start_pos, end_pos);
-	else if(is_between(mid_candidate, start_candidate, end_candidate))
+	if(arr[mid_pos] < arr[end_pos])
 		swap(arr, mid_pos, end_pos);
 }
 
@@ -40,11 +34,11 @@ int partition(int* arr, int start_pos, int end_pos) {
     return i;
 }
 
-void quicksort(int* arr, int start_pos, int end_pos) {
+void quick_sort(int* arr, int start_pos, int end_pos) {
 	if(start_pos >= end_pos) return;
 	
 	int partition_pos = partition(arr, start_pos, end_pos);
 	
-	quicksort(arr, start_pos, partition_pos-1);
-	quicksort(arr, partition_pos+1, end_pos);
+	quick_sort(arr, start_pos, partition_pos-1);
+	quick_sort(arr, partition_pos+1, end_pos);
 }
