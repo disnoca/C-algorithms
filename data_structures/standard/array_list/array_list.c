@@ -1,3 +1,9 @@
+/**
+ * Array List implementation
+ * 
+ * @author Samuel Pires
+*/
+
 #include <stdlib.h>
 #include <stdbool.h>
 #include "array_list.h"
@@ -17,7 +23,7 @@ static void resize(ArrayList* list) {
 	list->arr = new_arr;
 }
 
-/* Header Implementation */
+/* ---------------- Header Implementation ---------------- */
 
 ArrayList* al_create(int size) {
 	ArrayList* list =  (ArrayList*) Malloc(sizeof(ArrayList));

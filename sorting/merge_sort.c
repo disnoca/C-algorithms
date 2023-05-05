@@ -1,3 +1,9 @@
+/**
+ * Merge Sort sorting algorithm implementation.
+ * 
+ * @author Samuel Pires
+*/
+
 #include "sorting.h"
 #include "../wrapper_functions.h"
 

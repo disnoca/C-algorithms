@@ -1,3 +1,9 @@
+/**
+ * Linear search algorithm implementation.
+ *
+ * @author Samuel Pires 
+*/
+
 #include "searching.h"
 
 int linear_search(int* arr, int length, int target) {

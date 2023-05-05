@@ -1,3 +1,9 @@
+/**
+ * Linked List implementation.
+ * 
+ * @author Samuel Pires
+*/
+
 #include <stdlib.h>
 #include "linked_list.h"
 #include "../../../wrapper_functions.h"

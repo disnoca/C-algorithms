@@ -1,3 +1,9 @@
+/**
+ * Hash Map implementation.
+ * 
+ * @author Samuel Pires
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

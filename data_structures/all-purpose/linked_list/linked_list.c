@@ -1,3 +1,9 @@
+/**
+ * Linked List implementation.
+ * 
+ * @author Samuel Pires
+*/
+
 #include <stdio.h>
 #include <string.h>
 #include "linked_list.h"

@@ -1,3 +1,9 @@
+/**
+ * In-place Merge Sort sorting algorithm implementation.
+ * 
+ * @author Samuel Pires
+*/
+
 #include "sorting.h"
 
 static void merge(int* arr, int start_pos, int mid_pos, int end_pos) {

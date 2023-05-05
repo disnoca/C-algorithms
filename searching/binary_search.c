@@ -1,3 +1,9 @@
+/**
+ * Binary search algorithm implementation.
+ *
+ * @author Samuel Pires 
+*/
+
 #include "searching.h"
 
 int binary_search(int* arr, int length, int target) {

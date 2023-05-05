@@ -1,3 +1,9 @@
+/**
+ * Introsort sorting algorithm implementation.
+ * 
+ * @author Samuel Pires
+*/
+
 #include <math.h>
 #include "sorting.h"
 

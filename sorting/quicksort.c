@@ -1,3 +1,9 @@
+/**
+ * Quicksort sorting algorithm implementation.
+ * 
+ * @author Samuel Pires
+*/
+
 #include <stdbool.h>
 #include "sorting.h"
 #include "helper_functions.h"

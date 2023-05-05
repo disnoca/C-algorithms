@@ -1,3 +1,10 @@
+/**
+ * Stack implementation.
+ * 
+ * @author Samuel Pires
+ * @see linked_list
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "stack.h"
