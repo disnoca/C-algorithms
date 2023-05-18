@@ -19,4 +19,4 @@ run: $(TARGET)
 	./$(TARGET)
 
 clean:
-	rm -f $(SOURCES) $(TARGET)
+	rm -f $(SOURCES:.c=.o) $(TARGET)
