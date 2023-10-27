@@ -15,8 +15,9 @@ static const HMNode EMPTY_NODE;
 // Seed for the hash function
 static const unsigned SEED = 0;
 
-// The default initial capacity - MUST be a power of two.
-static const int DEFAULT_INITIAL_CAPACITY = 1 << 4;    // aka 16
+// The initial capacity - MUST be a power of two.
+static const int DEFUALT_INITIAL_CAPACITY = 1 << 4;    // aka 16
+static const double DEFAULT_LOAD_FACTOR = 0.75;
 
 static void add_entry(HashMap* hash_map, char* key, value_type value);
 
@@ -75,8 +76,6 @@ static HMNode* get_node(HashMap* hash_map, char* key) {
     return bucket;
 }
 
-// while it might seems excessive the have this function, it is necessary to be able to add entries to the hash map when rehashing
-// hm_put() increases the list's size so it can't be used, hence I chose to create this function
 static void add_entry(HashMap* hash_map, char* key, value_type value) {
     HMNode* bucket = get_bucket(hash_map, key);
     
@@ -95,15 +94,16 @@ static void add_entry(HashMap* hash_map, char* key, value_type value) {
 
 HashMap* hm_create() {
     HashMap* hash_map = (HashMap*) Calloc(1, sizeof(HashMap));
-    hash_map->capacity = DEFAULT_INITIAL_CAPACITY;
-    hash_map->buckets = (HMNode*) Calloc(DEFAULT_INITIAL_CAPACITY, sizeof(HMNode));
+    hash_map->capacity = DEFUALT_INITIAL_CAPACITY;
+    hash_map->load_factor = DEFAULT_LOAD_FACTOR;
+    hash_map->buckets = (HMNode*) Calloc(DEFUALT_INITIAL_CAPACITY, sizeof(HMNode));
     return hash_map;
 }
 
 void hm_put(HashMap* hash_map, char* key, value_type value) {
     add_entry(hash_map, key, value);
 
-    if(++hash_map->size > hash_map->capacity)
+    if(++hash_map->size > (hash_map->capacity * hash_map->load_factor))
         rehash(hash_map);
 }
 

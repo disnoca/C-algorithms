@@ -14,9 +14,10 @@ struct HMNode {
 };
 
 typedef struct {
-    HMNode* buckets;    // represents the pointer to the first position of the array of buckets
-    int capacity;       // capacity refers to the number of buckets
-    int size;           // whereas size referes to the number of elements the hash_map currently has
+    HMNode* buckets;    // the pointer to the first position of the array of buckets
+    int capacity;       // the number of buckets
+    double load_factor; // the maximum ratio of size/capacity before the hash_map is resized
+    int size;           // the number of elements the hash_map currently has
 } HashMap;
 
 /* ---------------- Functions ---------------- */
