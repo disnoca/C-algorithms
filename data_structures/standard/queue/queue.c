@@ -2,7 +2,6 @@
  * Queue implementation.
  * 
  * @author Samuel Pires
- * @see linked_list
 */
 
 #include <stdio.h>
@@ -10,22 +9,54 @@
 #include "queue.h"
 #include "../../../wrapper_functions.h"
 
-Queue* queue_create() {
-    return ll_create();
+/* ---------------- Helper Functions ---------------- */
+
+static QueueNode* create_queue_node(data_type data) {
+	QueueNode* node = Malloc(sizeof(QueueNode));
+	node->data = data;
+    node->next = NULL;
+	return node;
 }
 
-void queue_add(Queue* queue, data_type data) {
-    ll_add(queue, data);
+
+/* ---------------- Header Implementation ---------------- */
+
+Queue* queue_create() {
+    return (Queue*) Calloc(1, sizeof(Queue));
+}
+
+void queue_enqueue(Queue* queue, data_type data) {
+    QueueNode* node = create_queue_node(data);
+
+	if(queue->length == 0)
+		queue->head = node;
+	else
+		queue->tail->next = node;
+
+	queue->tail = node;
+	queue->length++;
 }
 
 data_type queue_poll(Queue* queue) {
-    return ll_remove_first(queue);
-}
+    QueueNode* node = queue->head;
+	data_type data = node->data;
 
-data_type queue_peek(Queue* queue) {
-    return ll_get(queue, 0);
+	queue->head = node->next;
+	queue->length--;
+
+	Free(node);
+	return data;
 }
 
 void queue_destroy(Queue* queue) {
-    ll_destroy(queue);
+    QueueNode* curr_node = queue->head;
+	QueueNode* next_node;
+
+	while(curr_node != NULL) {
+		next_node = curr_node->next;
+		Free(curr_node);
+		curr_node = next_node;
+	}
+
+	Free(queue);
 }

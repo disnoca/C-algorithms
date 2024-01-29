@@ -9,7 +9,7 @@
 #include "dynamic_array.h"
 #include "../../../wrapper_functions.h"
 
-/* Helper Functions */
+/* ---------------- Helper Functions ---------------- */
 
 static void resize(DynamicArray* da) {
 	int old_max_size = da->capacity;
