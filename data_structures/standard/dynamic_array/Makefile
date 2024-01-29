@@ -3,9 +3,9 @@ CFLAGS = -Wall -Wextra
 
 SOURCES = \
 ../../../wrapper_functions.c \
-array_list.c
+dynamic_array.c
 
-TARGET = array_list_tester
+TARGET = dynamic_array_tester
 
 all: $(TARGET)
 
