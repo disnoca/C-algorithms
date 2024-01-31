@@ -30,3 +30,10 @@ void Free(void* ptr) {
     free(ptr);
     ptr = NULL;
 }
+
+void* Realloc(void* ptr, size_t size) {
+    void* new_ptr;
+    if((new_ptr = realloc(ptr, size)) == NULL)
+        exit_with_error("Realloc error");
+    return new_ptr;
+}

@@ -12,15 +12,8 @@
 /* ---------------- Helper Functions ---------------- */
 
 static void resize(DynamicArray* da) {
-	int old_max_size = da->capacity;
 	da->capacity *= 2;
-	data_type* new_arr = (data_type*) Malloc(sizeof(data_type) * da->capacity);
-
-	for(int i = 0; i < old_max_size; i++)
-		new_arr[i] = da->arr[i];
-	
-	Free(da->arr);
-	da->arr = new_arr;
+	da->arr = Realloc(da->arr, sizeof(data_type) * da->capacity);
 }
 
 /* ---------------- Header Implementation ---------------- */
