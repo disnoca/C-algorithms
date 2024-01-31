@@ -94,7 +94,7 @@ int test_remove() {
 	test_score += da_remove(da, 0) ? 100 : 0;
 	test_score += da_get(da, 0)==1 ? 1000 : 0;
 	test_score += da_get(da, 4)==6 ? 10000 : 0;
-	test_score += da_get(da, 8)==8 ? 100000 : 0;
+	test_score += da_get(da, 6)==8 ? 100000 : 0;
 	test_score += da->size==7 ? 2000000 : 0;
     
     da_destroy(da);
