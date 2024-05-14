@@ -1,8 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra
 
-SOURCES := \
-../wrapper_functions.c \
+SOURCES := ../wrapper_functions.c \
 linear_search.c \
 binary_search.c
 

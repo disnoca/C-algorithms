@@ -1,5 +1,4 @@
-#ifndef SORTING
-#define SORTING
+#pragma once
 
 /* Subroutines */
 
@@ -64,5 +63,3 @@ void quick_sort(int* arr, int start_pos, int end_pos);
  * Stable: 	No
 */
 void intro_sort(int* arr, int length);
-
-#endif

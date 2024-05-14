@@ -1,5 +1,4 @@
-#ifndef WRAPPER_FUNCTIONS
-#define WRAPPER_FUNCTIONS
+#pragma once
 
 #include <stdlib.h>
 
@@ -11,5 +10,3 @@ void* Malloc(size_t size);
 void* Calloc(size_t nitems, size_t size);
 void Free(void* ptr);
 void* Realloc(void* ptr, size_t size);
-
-#endif

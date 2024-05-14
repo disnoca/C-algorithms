@@ -10,22 +10,22 @@
 static void merge(int* arr, int* left_arr, int left_length, int* right_arr, int right_length) {		
 	int i = 0, j = 0, k = 0;
 	
-	while(i < left_length && j < right_length) {
-		if(left_arr[i] < right_arr[j]) 
+	while (i < left_length && j < right_length) {
+		if (left_arr[i] < right_arr[j]) 
 			arr[k++] = left_arr[i++];
 		else
 			arr[k++] = right_arr[j++];
 	}
 	
-	while(i < left_length)
+	while (i < left_length)
 		arr[k++] = left_arr[i++];
 	
-	while(j < right_length)
+	while (j < right_length)
 		arr[k++] = right_arr[j++];
 }
 
 void merge_sort(int* arr, int length) {
-	if(length < 2) return;
+	if (length < 2) return;
 	
 	int mid_pos = length/2;
 

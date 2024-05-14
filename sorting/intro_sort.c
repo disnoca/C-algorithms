@@ -8,9 +8,9 @@
 #include "sorting.h"
 
 static void sort(int* arr, int length, int max_depth) {
-	if(length < 16)
+	if (length < 16)
 		insertion_sort(arr, length);
-	else if(max_depth == 0)
+	else if (max_depth == 0)
 		heap_sort(arr, length);
 	else {
 		int pivot_pos = partition(arr, 0, length-1);

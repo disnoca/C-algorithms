@@ -12,10 +12,10 @@ void selection_sort(int* arr, int length) {
 		int current_min_pos = i;
 
 		for(int j = i; j < length; j++) 
-			if(arr[j] < arr[current_min_pos]) 
+			if (arr[j] < arr[current_min_pos]) 
 				current_min_pos = j;
 
-		if(i != current_min_pos) 
+		if (i != current_min_pos) 
 			swap(arr+i, arr+current_min_pos);
 	}
 }

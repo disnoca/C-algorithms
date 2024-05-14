@@ -1,5 +1,4 @@
-#ifndef SEARCH
-#define SEARCH
+#pragma once
 
 /* Best: 	1
  * Average: n
@@ -14,5 +13,3 @@ int linear_search(int* arr, int length, int target);
  * Memory: 	1
 */
 int binary_search(int* arr, int length, int target);
-
-#endif

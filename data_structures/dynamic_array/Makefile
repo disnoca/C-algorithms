@@ -1,10 +1,9 @@
 CC = gcc
 CFLAGS = -Wall -Wextra
 
-SOURCES := ../wrapper_functions.c \
-CRC32.c
+SOURCES = ../../wrapper_functions.c dynamic_array.c
 
-TARGET = hashing_tester
+TARGET = dynamic_array_tester
 
 all: $(TARGET)
 

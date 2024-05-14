@@ -1,10 +1,9 @@
 CC = gcc
 CFLAGS = -Wall -Wextra
 
-SOURCES := ../wrapper_functions.c \
-CRC32.c
+SOURCES = ../../wrapper_functions.c avl_tree.c
 
-TARGET = hashing_tester
+TARGET = avl_tree_tester
 
 all: $(TARGET)
 

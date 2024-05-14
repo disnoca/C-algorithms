@@ -1,10 +1,9 @@
 CC = gcc
 CFLAGS = -Wall -Wextra
 
-SOURCES := ../wrapper_functions.c \
-CRC32.c
+SOURCES = ../../wrapper_functions.c doubly_linked_list.c
 
-TARGET = hashing_tester
+TARGET = doubly_linked_list_tester
 
 all: $(TARGET)
 

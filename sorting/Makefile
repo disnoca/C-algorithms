@@ -1,9 +1,7 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Wno-unused-function
+CFLAGS = -Wall -Wextra -lm
 
-SOURCES := \
-../wrapper_functions.c \
-helper_functions.c \
+SOURCES := ../wrapper_functions.c \
 insertion_sort.c \
 bubble_sort.c \
 selection_sort.c \
@@ -20,7 +18,7 @@ all: $(TARGET)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(TARGET): $(TARGET).c $(SOURCES:.c=.o)
-	$(CC) $(CFLAGS) -o $@ $< $(SOURCES:.c=.o) 
+	$(CC) -o $@ $< $(SOURCES:.c=.o) $(CFLAGS)
 
 run: $(TARGET)
 	./$(TARGET)

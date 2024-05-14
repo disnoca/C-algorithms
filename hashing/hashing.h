@@ -1,8 +1,5 @@
-#ifndef HASHING
-#define HASHING
+#pragma once
 
 #include <stdint.h>
 
-uint32_t CRC32(const char* data, unsigned length);
-
-#endif
+uint32_t CRC32(const char* data, int length);

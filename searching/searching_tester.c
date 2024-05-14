@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>
+#include <assert.h>
 #include "../wrapper_functions.h"
 #include "searching.h"
 
@@ -25,32 +26,31 @@ static int* get_sorted_int_array(int length) {
 	return arr;
 }
 
-bool test_linear_search(int length) {
+static void test_linear_search(int length) {
 	int* arr = get_randomized_int_array(length);
 
 	int target_pos = rand() % ARRAY_LENGTH;
-	int result = linear_search(arr, length, arr[target_pos]);
+	assert(linear_search(arr, length, arr[target_pos]));
 
 	Free(arr);
-	return result == target_pos;
 }
 
-bool test_binary_search(int length) {
+static void test_binary_search(int length) {
 	int* arr = get_sorted_int_array(length);
 
 	int target_pos = rand() % ARRAY_LENGTH;
-	int result = linear_search(arr, length, arr[target_pos]);
+	assert(linear_search(arr, length, arr[target_pos]));
 
 	Free(arr);
-	return result == target_pos;
 }
 
 int main(void) {
 	srand(time(NULL));
 	int length = ARRAY_LENGTH;
 
-	printf("Linear Search: %d\n", test_linear_search(length));
-	printf("Binary Search: %d\n", test_binary_search(length));
+	test_linear_search(length);
+	test_binary_search(length);
 
+	printf("All tests passed.\n");
 	return 0;
 }

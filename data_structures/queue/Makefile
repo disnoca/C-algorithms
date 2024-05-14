@@ -1,10 +1,9 @@
 CC = gcc
 CFLAGS = -Wall -Wextra
 
-SOURCES := ../wrapper_functions.c \
-CRC32.c
+SOURCES = ../../wrapper_functions.c queue.c
 
-TARGET = hashing_tester
+TARGET = queue_tester
 
 all: $(TARGET)
 
