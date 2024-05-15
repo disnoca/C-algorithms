@@ -18,12 +18,12 @@ static void resize(DynamicArray* da) {
 
 /* ---------------- Header Implementation ---------------- */
 
-DynamicArray* da_create(int size) {
+DynamicArray* da_create(int inital_capacity) {
 	DynamicArray* da =  (DynamicArray*) Malloc(sizeof(DynamicArray));
 
-	da->arr = (data_type*) Malloc(sizeof(data_type) * size);
+	da->arr = (data_type*) Malloc(sizeof(data_type) * inital_capacity);
 	da->size = 0;
-	da->capacity = size;
+	da->capacity = inital_capacity;
 
 	return da;
 }

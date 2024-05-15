@@ -11,7 +11,7 @@ typedef struct {
 
 /* ---------------- Functions ---------------- */
 
-DynamicArray* da_create();
+DynamicArray* da_create(int initial_capacity);
 
 void da_add(DynamicArray* da, data_type data);
 

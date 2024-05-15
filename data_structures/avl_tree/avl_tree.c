@@ -11,7 +11,7 @@
 
 /* ---------------- Compare Function ---------------- */
 
-static data_type compare(data_type e1, data_type e2) {
+static int compare(data_type e1, data_type e2) {
     if (e1 > e2) return 1;
     if (e1 < e2) return -1;
     return 0;
