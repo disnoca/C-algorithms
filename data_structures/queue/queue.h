@@ -1,16 +1,15 @@
 #pragma once
 
-typedef int data_type;
 
 typedef struct QueueNode QueueNode;
 
 typedef struct {
 	QueueNode *head, *tail;
-	int length;
+	size_t length;
 } Queue;
 
 struct QueueNode {
-	data_type data;
+	void* data;
 	QueueNode* next;
 };
 
@@ -18,10 +17,10 @@ struct QueueNode {
 
 Queue* queue_create();
 
-void queue_enqueue(Queue* queue, data_type data);
+void queue_enqueue(Queue* queue, void* data);
 
-data_type queue_dequeue(Queue* queue);
+void* queue_dequeue(Queue* queue);
 
-data_type queue_peek(Queue* queue);
+void* queue_peek(Queue* queue);
 
 void queue_destroy(Queue* queue);

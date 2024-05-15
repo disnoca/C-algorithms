@@ -1,35 +1,36 @@
 #pragma once
 
-typedef int data_type;
+#include <sys/types.h>
+
 
 /* ---------------- Structs ---------------- */
 
 typedef struct {
-	data_type* arr;
-	int size, capacity;
+	void** arr;
+	size_t size, capacity;
 } DynamicArray;
 
 /* ---------------- Functions ---------------- */
 
-DynamicArray* da_create(int initial_capacity);
+DynamicArray* da_create(size_t initial_capacity);
 
-void da_add(DynamicArray* da, data_type data);
+void da_add(DynamicArray* da, void* data);
 
-void da_add_at(DynamicArray* da, data_type data, int pos);
+void da_add_at(DynamicArray* da, void* data, size_t pos);
 
-data_type da_remove_last(DynamicArray* da);
+void* da_remove_last(DynamicArray* da);
 
-data_type da_remove_at(DynamicArray* da, int pos);
+void* da_remove_at(DynamicArray* da, size_t pos);
 
-bool da_remove(DynamicArray* da, data_type data);
+bool da_remove(DynamicArray* da, void* data);
 
-data_type da_get(DynamicArray* da, int pos);
+void* da_get(DynamicArray* da, size_t pos);
 
-data_type da_set(DynamicArray* da, data_type data, int pos);
+void* da_set(DynamicArray* da, void* data, size_t pos);
 
-int da_index_of(DynamicArray* da, data_type data);
+ssize_t da_index_of(DynamicArray* da, void* data);
 
-bool da_contains(DynamicArray* da, data_type data);
+bool da_contains(DynamicArray* da, void* data);
 
 void da_clear(DynamicArray* da);
 

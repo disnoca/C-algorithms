@@ -11,7 +11,7 @@ all: $(TARGET)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(TARGET): $(TARGET).c $(SOURCES:.c=.o)
-	$(CC) $(CFLAGS) -o $@ $< $(SOURCES:.c=.o) 
+	$(CC) $(CFLAGS) -o $@ $< $(SOURCES:.c=.o)
 
 run: $(TARGET)
 	./$(TARGET)

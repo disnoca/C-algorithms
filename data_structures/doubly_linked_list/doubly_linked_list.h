@@ -1,8 +1,8 @@
 #pragma once
 
 #include <stdbool.h>
+#include <sys/types.h>
 
-typedef int data_type;
 
 /* ---------------- Structs ---------------- */
 
@@ -10,39 +10,39 @@ typedef struct DLLNode DLLNode;
 
 struct DLLNode {
     DLLNode *prev, *next;
-    data_type data;
+    void* data;
 };
 
 typedef struct {
     DLLNode *head, *tail;
-    int size;
+    size_t size;
 } DoublyLinkedList;
 
 /* ---------------- Functions ---------------- */
 
 DoublyLinkedList* ll_create();
 
-void ll_add(DoublyLinkedList* list, data_type data);
+void ll_add(DoublyLinkedList* list, void* data);
 
-void ll_add_first(DoublyLinkedList* list, data_type data);
+void ll_add_first(DoublyLinkedList* list, void* data);
 
-void ll_add_at(DoublyLinkedList* list, data_type data, int pos);
+void ll_add_at(DoublyLinkedList* list, void* data, size_t pos);
 
-data_type ll_remove_first(DoublyLinkedList* list);
+void* ll_remove_first(DoublyLinkedList* list);
 
-data_type ll_remove_last(DoublyLinkedList* list);
+void* ll_remove_last(DoublyLinkedList* list);
 
-data_type ll_remove_at(DoublyLinkedList* list, int pos);
+void* ll_remove_at(DoublyLinkedList* list, size_t pos);
 
-bool ll_remove(DoublyLinkedList* list, data_type data);
+bool ll_remove(DoublyLinkedList* list, void* data);
 
-data_type ll_get(DoublyLinkedList* list, int pos);
+void* ll_get(DoublyLinkedList* list, size_t pos);
 
-data_type ll_set(DoublyLinkedList* list, data_type data, int pos);
+void* ll_set(DoublyLinkedList* list, void* data, size_t pos);
 
-int ll_index_of(DoublyLinkedList* list, data_type data);
+ssize_t ll_index_of(DoublyLinkedList* list, void* data);
 
-bool ll_contains(DoublyLinkedList* list, data_type data);
+bool ll_contains(DoublyLinkedList* list, void* data);
 
 void ll_clear(DoublyLinkedList* list);
 

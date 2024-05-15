@@ -1,21 +1,22 @@
 #pragma once
 
+#include <stddef.h>
 
-typedef int data_type;
 
 /* ---------------- Structs ---------------- */
 
 typedef struct {
-	data_type* arr;
-	int size, capacity;
+	void** arr;
+	size_t size, capacity;
+	int(*compare)(void* arg1, void* arg2);
 } Heap;
 
 /* ---------------- Functions ---------------- */
 
-Heap* heap_create(int initial_capacity);
+Heap* heap_create(size_t initial_capacity, int(*compare)(void*, void*));
 
-void heap_insert(Heap* heap, data_type data);
+void heap_insert(Heap* heap, void* data);
 
-data_type heap_extract(Heap* heap);
+void* heap_extract(Heap* heap);
 
 void heap_destroy(Heap* heap);

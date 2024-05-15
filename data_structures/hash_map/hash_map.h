@@ -1,35 +1,33 @@
 #pragma once
 
-typedef int value_type;
-
 /* ---------------- Structs ---------------- */
 
 typedef struct HMNode HMNode;
 
 struct HMNode {
-    HMNode* next;
-    char* key;
-    value_type value;
+	HMNode* next;
+	void *key, *value;
 };
 
 typedef struct {
-    HMNode* buckets;    // the pointer to the first position of the array of buckets
-    int capacity;       // the number of buckets
-    double load_factor; // the maximum ratio of size/capacity before the hash_map is resized
-    int size;           // the number of elements the hash_map currently has
+	HMNode* buckets;   	// the pointer to the first position of the array of buckets
+	size_t capacity;    // the number of buckets
+	float load_factor;	// the maximum ratio of size/capacity before the hash_map is resized
+	size_t size;       	// the number of elements the hash_map currently has
+	unsigned long(*hash)(const void*);
 } HashMap;
 
 /* ---------------- Functions ---------------- */
 
-HashMap* hm_create();
+HashMap* hm_create(unsigned long(*hash)(const void*));
 
-void hm_put(HashMap* hash_map, char* key, value_type value);
+void hm_put(HashMap* hash_map, void* key, void* value);
 
-value_type hm_remove(HashMap* hash_map, char* key);
+void* hm_remove(HashMap* hash_map, void* key);
 
-value_type hm_get(HashMap* hash_map, char* key);
+void* hm_get(HashMap* hash_map, void* key);
 
-value_type hm_replace(HashMap* hash_map, char* key, value_type value);
+void* hm_replace(HashMap* hash_map, void* key, void* value);
 
 void hm_clear(HashMap* hash_map);
 

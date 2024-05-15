@@ -11,7 +11,7 @@
 
 /* ---------------- Helper Functions ---------------- */
 
-static QueueNode* create_queue_node(data_type data) {
+static QueueNode* create_queue_node(void* data) {
 	QueueNode* node = Malloc(sizeof(QueueNode));
 	node->data = data;
     node->next = NULL;
@@ -25,7 +25,7 @@ Queue* queue_create() {
     return (Queue*) Calloc(1, sizeof(Queue));
 }
 
-void queue_enqueue(Queue* queue, data_type data) {
+void queue_enqueue(Queue* queue, void* data) {
     QueueNode* node = create_queue_node(data);
 
 	if (queue->length == 0)
@@ -37,9 +37,9 @@ void queue_enqueue(Queue* queue, data_type data) {
 	queue->length++;
 }
 
-data_type queue_dequeue(Queue* queue) {
+void* queue_dequeue(Queue* queue) {
     QueueNode* node = queue->head;
-	data_type data = node->data;
+	void* data = node->data;
 
 	queue->head = node->next;
 	queue->length--;

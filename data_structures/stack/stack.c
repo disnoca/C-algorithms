@@ -11,7 +11,7 @@
 
 /* ---------------- Helper Functions ---------------- */
 
-static StackNode* create_stack_node(data_type data) {
+static StackNode* create_stack_node(void* data) {
 	StackNode* node = Malloc(sizeof(StackNode));
 	node->data = data;
     node->prev = NULL;
@@ -25,16 +25,16 @@ Stack* stack_create() {
     return (Stack*) Calloc(1, sizeof(Stack));
 }
 
-void stack_push(Stack* stack, data_type data) {
+void stack_push(Stack* stack, void* data) {
     StackNode* node = create_stack_node(data);
     node->prev = stack->tail;
     stack->tail = node;
     stack->size++;
 }
 
-data_type stack_pop(Stack* stack) {
+void* stack_pop(Stack* stack) {
     StackNode* node = stack->tail;
-    data_type data = node->data;
+    void* data = node->data;
 
     stack->tail = node->prev;
     stack->size--;
@@ -43,7 +43,7 @@ data_type stack_pop(Stack* stack) {
     return data;
 }
 
-data_type stack_peek(Stack* stack)
+void* stack_peek(Stack* stack)
 {
     return stack->tail->data;
 }

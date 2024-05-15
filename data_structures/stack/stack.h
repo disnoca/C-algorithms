@@ -1,16 +1,15 @@
 #pragma once
 
-typedef int data_type;
 
 typedef struct StackNode StackNode;
 
 typedef struct {
 	StackNode *tail;
-	int size;
+	size_t size;
 } Stack;
 
 struct StackNode {
-	data_type data;
+	void* data;
 	StackNode* prev;
 };
 
@@ -18,10 +17,10 @@ struct StackNode {
 
 Stack* stack_create();
 
-void stack_push(Stack* stack, data_type data);
+void stack_push(Stack* stack, void* data);
 
-data_type stack_pop(Stack* stack);
+void* stack_pop(Stack* stack);
 
-data_type stack_peek(Stack* stack);
+void* stack_peek(Stack* stack);
 
 void stack_destroy(Stack* stack);
