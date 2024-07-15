@@ -14,7 +14,8 @@ int curr_val;
 #define DEREF(p)    (*((int*)(p)))
 
 
-static bool check_queue_integrity(Queue* queue) {
+static bool check_queue_integrity(Queue* queue)
+{
 	if (queue->length == 0) 
 		return true;
 
@@ -40,7 +41,8 @@ static bool check_queue_integrity(Queue* queue) {
 	return true;
 }
 
-__attribute__((unused)) void print_queue_contents(Queue* queue) {
+__attribute__((unused)) void print_queue_contents(Queue* queue)
+{
 	QueueNode* curr_node = queue->head;
 	for(size_t i = 0; i < queue->length; i++) {
 		printf("%d ", DEREF(curr_node->data));
@@ -49,14 +51,16 @@ __attribute__((unused)) void print_queue_contents(Queue* queue) {
 	printf("\n");
 }
 
-static Queue* create_queue_with_ascending_values(int length) {
+static Queue* create_queue_with_ascending_values(int length)
+{
 	Queue* queue = queue_create();
 	for(int i = 0; i < length; i++)
 		queue_enqueue(queue, REF_OF(i));
 	return queue;
 }
 
-static void test_queue_enqueue() {
+static void test_queue_enqueue()
+{
 	Queue* queue = queue_create();
 
 	queue_enqueue(queue, REF_OF(10));
@@ -77,7 +81,8 @@ static void test_queue_enqueue() {
 	queue_destroy(queue);
 }
 
-static void test_queue_dequeue() {
+static void test_queue_dequeue()
+{
 	Queue* queue = create_queue_with_ascending_values(10);
 
 	for(int i = 0; i < 10; i++)
@@ -88,7 +93,8 @@ static void test_queue_dequeue() {
 	queue_destroy(queue);
 }
 
-int main() {
+int main()
+{
 	test_queue_enqueue();
 	test_queue_dequeue();
 

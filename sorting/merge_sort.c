@@ -7,7 +7,8 @@
 #include "sorting.h"
 #include "../wrapper_functions.h"
 
-static void merge(int* arr, int* left_arr, int left_length, int* right_arr, int right_length) {		
+static void merge(int* arr, int* left_arr, int left_length, int* right_arr, int right_length)
+{
 	int i = 0, j = 0, k = 0;
 	
 	while (i < left_length && j < right_length) {
@@ -24,7 +25,8 @@ static void merge(int* arr, int* left_arr, int left_length, int* right_arr, int 
 		arr[k++] = right_arr[j++];
 }
 
-void merge_sort(int* arr, int length) {
+void merge_sort(int* arr, int length)
+{
 	if (length < 2) return;
 	
 	int mid_pos = length/2;

@@ -17,18 +17,17 @@ typedef struct {
 	unsigned long(*hash)(const void*);
 } HashMap;
 
+
 /* ---------------- Functions ---------------- */
 
 HashMap* hm_create(unsigned long(*hash)(const void*));
-
-void hm_put(HashMap* hash_map, void* key, void* value);
-
-void* hm_remove(HashMap* hash_map, void* key);
-
-void* hm_get(HashMap* hash_map, void* key);
-
-void* hm_replace(HashMap* hash_map, void* key, void* value);
-
+void hm_destroy(HashMap* hash_map);
 void hm_clear(HashMap* hash_map);
 
-void hm_destroy(HashMap* hash_map);
+void hm_put(HashMap* hash_map, void* key, void* value);
+void* hm_remove(HashMap* hash_map, void* key);
+void* hm_get(HashMap* hash_map, void* key);
+void* hm_replace(HashMap* hash_map, void* key, void* value);
+
+
+// TODO: put returns old value

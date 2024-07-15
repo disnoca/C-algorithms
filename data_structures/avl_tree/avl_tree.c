@@ -15,7 +15,8 @@
 
 /* ---------------- Tree Balance Functions ---------------- */
 
-static void replace_parents_child(AVLTreeNode* old_child, AVLTreeNode* new_child) {
+static void replace_parents_child(AVLTreeNode* old_child, AVLTreeNode* new_child)
+{
 	AVLTreeNode* parent = old_child->parent;
 	if (parent->left == old_child)
 		parent->left = new_child;
@@ -23,7 +24,8 @@ static void replace_parents_child(AVLTreeNode* old_child, AVLTreeNode* new_child
 		parent->right = new_child;
 }
 
-static void perform_left_rotation(AVLTree* tree, AVLTreeNode* node) {
+static void perform_left_rotation(AVLTree* tree, AVLTreeNode* node)
+{
 	AVLTreeNode* parent_node = node->parent;
 	AVLTreeNode* sub_node = node->right;
 
@@ -50,7 +52,8 @@ static void perform_left_rotation(AVLTree* tree, AVLTreeNode* node) {
 	}
 }
 
-static void perform_right_rotation(AVLTree* tree, AVLTreeNode* node) {
+static void perform_right_rotation(AVLTree* tree, AVLTreeNode* node)
+{
 	AVLTreeNode* parent_node = node->parent;
 	AVLTreeNode* sub_node = node->left;
 
@@ -77,7 +80,8 @@ static void perform_right_rotation(AVLTree* tree, AVLTreeNode* node) {
 	}
 }
 
-static void perform_LR_rotation(AVLTree* tree, AVLTreeNode* node) {
+static void perform_LR_rotation(AVLTree* tree, AVLTreeNode* node)
+{
 	AVLTreeNode* parent_node = node->parent;
 	AVLTreeNode* sub_node = node->left;
 	AVLTreeNode* sub_sub_node = sub_node->right;
@@ -116,7 +120,8 @@ static void perform_LR_rotation(AVLTree* tree, AVLTreeNode* node) {
 	sub_sub_node->balance = 0;
 }
 
-static void perform_RL_rotation(AVLTree* tree, AVLTreeNode* node) {
+static void perform_RL_rotation(AVLTree* tree, AVLTreeNode* node)
+{
 	AVLTreeNode* parent_node = node->parent;
 	AVLTreeNode* sub_node = node->right;
 	AVLTreeNode* sub_sub_node = sub_node->left;
@@ -158,7 +163,8 @@ static void perform_RL_rotation(AVLTree* tree, AVLTreeNode* node) {
 
 // assumes that the given node is unbalanced
 // this only has implications within the data structure's code
-static void balance_node(AVLTree* tree, AVLTreeNode* node) {
+static void balance_node(AVLTree* tree, AVLTreeNode* node)
+{
 	if (node->balance < -1)
 		if (node->left->balance <= 0)
 			perform_right_rotation(tree, node);
@@ -171,16 +177,18 @@ static void balance_node(AVLTree* tree, AVLTreeNode* node) {
 			perform_RL_rotation(tree, node);
 }
 
-static int node_is_balanced(AVLTreeNode* node) {
+static int node_is_balanced(AVLTreeNode* node)
+{
 	return node->balance >= -1 && node->balance <= 1;
 }
 
-static void update_balance_on_add(AVLTree* tree, AVLTreeNode* node) {
+static void update_balance_on_add(AVLTree* tree, AVLTreeNode* node)
+{
 	AVLTreeNode* parent_node = node->parent;
 
 	while (parent_node != NULL) {
 		parent_node->balance += NORMALIZE_COMPARE(tree->compare(node->data, parent_node->data));
-		if (parent_node->balance == 0) 
+		if (parent_node->balance == 0)
 			return;
 		if (!node_is_balanced(parent_node)) {
 			balance_node(tree, parent_node);
@@ -191,7 +199,8 @@ static void update_balance_on_add(AVLTree* tree, AVLTreeNode* node) {
 	}
 }
 
-static void update_balance_on_remove(AVLTree* tree, AVLTreeNode* node) {
+static void update_balance_on_remove(AVLTree* tree, AVLTreeNode* node)
+{
 	AVLTreeNode* parent_node = node->parent;
 
 	while (parent_node != NULL) {
@@ -209,13 +218,15 @@ static void update_balance_on_remove(AVLTree* tree, AVLTreeNode* node) {
 
 /* ---------------- Helper Functions ---------------- */
 
-static AVLTreeNode* create_node(void* data) {
+static AVLTreeNode* create_node(void* data)
+{
 	AVLTreeNode* node = (AVLTreeNode*) Calloc(1, sizeof(AVLTreeNode));
 	node->data = data;
 	return node;
 }
 
-static AVLTreeNode* get_node(AVLTree* tree, void* data) {
+static AVLTreeNode* get_node(AVLTree* tree, void* data)
+{
 	AVLTreeNode* curr_node = tree->root;
 	int comparison;
 
@@ -225,7 +236,8 @@ static AVLTreeNode* get_node(AVLTree* tree, void* data) {
 	return curr_node;
 }
 
-static AVLTreeNode* get_parent_to_be_node(AVLTree* tree, void* data) {
+static AVLTreeNode* get_parent_to_be_node(AVLTree* tree, void* data)
+{
 	AVLTreeNode* curr_node = tree->root;
 	while (1) {
 		if (tree->compare(data, curr_node->data) < 1) {
@@ -241,14 +253,16 @@ static AVLTreeNode* get_parent_to_be_node(AVLTree* tree, void* data) {
 	}
 }
 
-static AVLTreeNode* get_predecessor_node(AVLTreeNode* node) {
+static AVLTreeNode* get_predecessor_node(AVLTreeNode* node)
+{
 	node = node->left;
 	while (node->right != NULL)
 		node = node->right;
 	return node;
 }
 
-static AVLTreeNode* get_successor_node(AVLTreeNode* node) {
+static AVLTreeNode* get_successor_node(AVLTreeNode* node)
+{
 	node = node->right;
 	while (node->left != NULL)
 		node = node->left;
@@ -257,13 +271,15 @@ static AVLTreeNode* get_successor_node(AVLTreeNode* node) {
 
 /* ---------------- Header Implementation ---------------- */
 
-AVLTree* avlt_create(int(*compare)(void*, void*)) {
+AVLTree* avlt_create(int(*compare)(void*, void*))
+{
 	AVLTree* tree = (AVLTree*) Calloc(1, sizeof(AVLTree));
 	tree->compare = compare;
 	return tree;
 }
 
-void avlt_add(AVLTree* tree, void* data) {
+void avlt_add(AVLTree* tree, void* data)
+{
 	AVLTreeNode* new_node = create_node(data);
 	if (tree->size++ == 0) {
 		tree->root = new_node;
@@ -280,7 +296,8 @@ void avlt_add(AVLTree* tree, void* data) {
 	update_balance_on_add(tree, new_node);
 }
 
-void* avlt_remove(AVLTree* tree, void* data) {
+void* avlt_remove(AVLTree* tree, void* data)
+{
 	AVLTreeNode* node = get_node(tree, data);
 	
 	if (node == NULL)
@@ -314,18 +331,21 @@ void* avlt_remove(AVLTree* tree, void* data) {
 	return node_data;
 }
 
-void* avlt_get(AVLTree* tree, void* data) {
+void* avlt_get(AVLTree* tree, void* data)
+{
 	return get_node(tree, data)->data;
 }
 
-int avlt_contains(AVLTree* tree, void* data) {
+int avlt_contains(AVLTree* tree, void* data)
+{
 	return get_node(tree, data) == NULL ? 0 : 1;
 }
 
-void avlt_clear(AVLTree* tree) {
+void avlt_clear(AVLTree* tree)
+{
 	if (tree->size == 0) return;
 
-	AVLTreeNode* nodes[tree->size];
+	AVLTreeNode** nodes = Malloc(tree->size * sizeof(AVLTreeNode*));
 	nodes[0] = tree->root;
 	int i = 1, j = 0;
 
@@ -342,9 +362,12 @@ void avlt_clear(AVLTree* tree) {
 	}  while (j < i);
 
 	tree->size = 0;
+	tree->root = NULL;
+	Free(nodes);
 }
 
-void avlt_destroy(AVLTree* tree) {
+void avlt_destroy(AVLTree* tree)
+{
 	avlt_clear(tree);
 	Free(tree);
 }

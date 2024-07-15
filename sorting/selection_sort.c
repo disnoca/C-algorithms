@@ -7,7 +7,8 @@
 #include "sorting.h"
 #include "helper_functions.h"
 
-void selection_sort(int* arr, int length) {
+void selection_sort(int* arr, int length)
+{
 	for(int i = 0; i < length; i++) {
 		int current_min_pos = i;
 

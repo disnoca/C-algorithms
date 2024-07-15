@@ -7,7 +7,8 @@
 #include <math.h>
 #include "sorting.h"
 
-static void sort(int* arr, int length, int max_depth) {
+static void sort(int* arr, int length, int max_depth)
+{
 	if (length < 16)
 		insertion_sort(arr, length);
 	else if (max_depth == 0)
@@ -19,7 +20,8 @@ static void sort(int* arr, int length, int max_depth) {
 	}
 }
 
-void intro_sort(int* arr, int length) {
+void intro_sort(int* arr, int length)
+{
 	int max_depth = 2 * log2(length);
 	sort(arr, length, max_depth);
 }

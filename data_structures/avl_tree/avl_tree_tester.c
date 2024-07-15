@@ -13,14 +13,16 @@ int curr_val;
 #define DEREF(p)    (*((int*)(p)))
 
 
-int compare(void* arg1, void* arg2) {
+int compare(void* arg1, void* arg2)
+{
 	if (DEREF(arg1) > DEREF(arg2)) return 1;
 	if (DEREF(arg1) < DEREF(arg2)) return -1;
 	return 0;
 }
 
 
-static AVLTree* create_avltree_with_content() {
+static AVLTree* create_avltree_with_content()
+{
 	AVLTree* tree = avlt_create(compare);
 	avlt_add(tree, REF_OF(5));
 	avlt_add(tree, REF_OF(3));
@@ -32,7 +34,8 @@ static AVLTree* create_avltree_with_content() {
 	return tree;
 }
 
-static void test_add_and_tree_structure() {
+static void test_add_and_tree_structure()
+{
 	AVLTree* tree = create_avltree_with_content();
 
 	assert(DEREF(tree->root->data) == 5);
@@ -48,7 +51,8 @@ static void test_add_and_tree_structure() {
 	Free(tree);
 }
 
-static void test_add_and_balance_values() {
+static void test_add_and_balance_values()
+{
 	AVLTree* tree = avlt_create(compare);
 
 	avlt_add(tree, REF_OF(5));
@@ -76,7 +80,8 @@ static void test_add_and_balance_values() {
 	Free(tree);
 }
 
-static void test_get() {
+static void test_get()
+{
 	AVLTree* tree = create_avltree_with_content();
 
 	assert(DEREF(avlt_get(tree, values + curr_val - 4)) == 2);
@@ -91,7 +96,8 @@ static void test_get() {
 	Free(tree);
 }
 
-static void test_contains() {
+static void test_contains()
+{
 	AVLTree* tree = create_avltree_with_content();
 
 	assert(!avlt_contains(tree, REF_OF(1)));
@@ -103,7 +109,8 @@ static void test_contains() {
 	Free(tree);
 }
 
-static void test_remove_with_no_children() {
+static void test_remove_with_no_children()
+{
 	AVLTree* tree = create_avltree_with_content();
 
 	assert(DEREF(avlt_remove(tree, values + curr_val - 4)) == 2);
@@ -119,7 +126,8 @@ static void test_remove_with_no_children() {
 	Free(tree);
 }
 
-static void test_remove_with_single_children() {
+static void test_remove_with_single_children()
+{
 	AVLTree* tree = create_avltree_with_content();
 	avlt_add(tree, REF_OF(1));
 	avlt_add(tree, REF_OF(9));
@@ -142,7 +150,8 @@ static void test_remove_with_single_children() {
 	Free(tree);
 }
 
-static void test_remove_with_double_children() {
+static void test_remove_with_double_children()
+{
 	AVLTree* tree = create_avltree_with_content();
 
 	assert(DEREF(avlt_remove(tree, values + curr_val - 7)) == 5);
@@ -160,7 +169,8 @@ static void test_remove_with_double_children() {
 	Free(tree);
 }
 
-static void test_left_rotation_on_add() {
+static void test_left_rotation_on_add()
+{
 	AVLTree* tree = avlt_create(compare);
 
 	avlt_add(tree, REF_OF(5));
@@ -181,7 +191,8 @@ static void test_left_rotation_on_add() {
 	Free(tree);
 }
 
-static void test_left_rotation_on_remove() {
+static void test_left_rotation_on_remove()
+{
 	AVLTree* tree = create_avltree_with_content();
 
 	assert(DEREF(avlt_remove(tree, values + curr_val - 4)) == 2);
@@ -201,7 +212,8 @@ static void test_left_rotation_on_remove() {
 	Free(tree);
 }
 
-static void test_right_rotation_on_add() {
+static void test_right_rotation_on_add()
+{
 	AVLTree* tree = avlt_create(compare);
 
 	avlt_add(tree, REF_OF(5));
@@ -222,7 +234,8 @@ static void test_right_rotation_on_add() {
 	Free(tree);
 }
 
-static void test_right_rotation_on_remove() {
+static void test_right_rotation_on_remove()
+{
 	AVLTree* tree = create_avltree_with_content();
 
 	assert(DEREF(avlt_remove(tree, values + curr_val - 2)) == 6);
@@ -242,7 +255,8 @@ static void test_right_rotation_on_remove() {
 	Free(tree);
 }
 
-static void test_lr_rotation_on_add() {
+static void test_lr_rotation_on_add()
+{
 	AVLTree* tree = avlt_create(compare);
 
 	avlt_add(tree, REF_OF(5));
@@ -260,7 +274,8 @@ static void test_lr_rotation_on_add() {
 	Free(tree);
 }
 
-static void test_lr_rotation_on_remove() {
+static void test_lr_rotation_on_remove()
+{
 	AVLTree* tree = avlt_create(compare);
 
 	avlt_add(tree, REF_OF(5));
@@ -286,7 +301,8 @@ static void test_lr_rotation_on_remove() {
 	Free(tree);
 }
 
-static void test_rl_rotation_on_add() {
+static void test_rl_rotation_on_add()
+{
 	AVLTree* tree = avlt_create(compare);
 
 	avlt_add(tree, REF_OF(5));
@@ -304,7 +320,8 @@ static void test_rl_rotation_on_add() {
 	Free(tree);
 }
 
-static void test_rl_rotation_on_remove() {
+static void test_rl_rotation_on_remove()
+{
 	AVLTree* tree = avlt_create(compare);
 
 	avlt_add(tree, REF_OF(5));
@@ -330,7 +347,8 @@ static void test_rl_rotation_on_remove() {
 	Free(tree);
 }
 
-int main() {
+int main()
+{
 	test_add_and_tree_structure();
 	test_add_and_balance_values();
 	test_get();

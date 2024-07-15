@@ -5,7 +5,8 @@
 #define FINAL_XOR_VALUE 	0xFFFFFFFF
 
 
-uint32_t CRC32(const char* data, int length) {
+uint32_t CRC32(const char* data, int length)
+{
 	uint32_t crc = START_VALUE;
 
 	for (int i = 0; i < length; i++) {

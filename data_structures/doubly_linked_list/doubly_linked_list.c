@@ -10,13 +10,15 @@
 
 /* ---------------- Helper Functions ---------------- */
 
-static DLLNode* create_node(void* data) {
+static DLLNode* create_node(void* data)
+{
 	DLLNode* node = (DLLNode*) Calloc(1, sizeof(DLLNode));
 	node->data = data;
 	return node;
 }
 
-static DLLNode* get_node(DoublyLinkedList* list, size_t pos) {
+static DLLNode* get_node(DoublyLinkedList* list, size_t pos)
+{
 	DLLNode* curr_node;
 
 	if (pos <= list->size/2) {
@@ -37,18 +39,21 @@ static DLLNode* get_node(DoublyLinkedList* list, size_t pos) {
 	}
 }
 
-static void link_nodes(DLLNode* node1, DLLNode* node2) {
+static void link_nodes(DLLNode* node1, DLLNode* node2)
+{
 	node1->next = node2;
 	node2->prev = node1;
 }
 
 /* ---------------- Header Implementation ---------------- */
 
-DoublyLinkedList* ll_create() {
+DoublyLinkedList* ll_create()
+{
 	return (DoublyLinkedList*) Calloc(1, sizeof(DoublyLinkedList));
 }
 
-void ll_add(DoublyLinkedList* list, void* data) {
+void ll_add(DoublyLinkedList* list, void* data)
+{
 	DLLNode* new_node = create_node(data);
 
 	if (list->size == 0) {
@@ -63,7 +68,8 @@ void ll_add(DoublyLinkedList* list, void* data) {
 	list->size++;
 }
 
-void ll_add_first(DoublyLinkedList* list, void* data) {
+void ll_add_first(DoublyLinkedList* list, void* data)
+{
 	if (list->size == 0) {
 		ll_add(list, data);
 		return;
@@ -76,7 +82,8 @@ void ll_add_first(DoublyLinkedList* list, void* data) {
 	list->size++;
 }
 
-void ll_add_at(DoublyLinkedList* list, void* data, size_t pos) {
+void ll_add_at(DoublyLinkedList* list, void* data, size_t pos)
+{
 	if (list->size == 0 || pos == list->size) {
 		ll_add(list, data);
 		return;
@@ -96,7 +103,8 @@ void ll_add_at(DoublyLinkedList* list, void* data, size_t pos) {
 	list->size++;
 }
 
-void* ll_remove_first(DoublyLinkedList* list) {
+void* ll_remove_first(DoublyLinkedList* list)
+{
 	DLLNode* node = list->head;
 	void* data = node->data;
 
@@ -110,7 +118,8 @@ void* ll_remove_first(DoublyLinkedList* list) {
 	return data;
 }
 
-void* ll_remove_last(DoublyLinkedList* list) {
+void* ll_remove_last(DoublyLinkedList* list)
+{
 	DLLNode* node = list->tail;
 	void* data = node->data;
 
@@ -124,7 +133,8 @@ void* ll_remove_last(DoublyLinkedList* list) {
 	return data;
 }
 
-void* ll_remove_at(DoublyLinkedList* list, size_t pos) {
+void* ll_remove_at(DoublyLinkedList* list, size_t pos)
+{
 	if (pos == 0) 			
 		return ll_remove_first(list);
 
@@ -141,7 +151,8 @@ void* ll_remove_at(DoublyLinkedList* list, size_t pos) {
 	return data;
 }
 
-bool ll_remove(DoublyLinkedList* list, void* data) {
+bool ll_remove(DoublyLinkedList* list, void* data)
+{
 	DLLNode* curr_node = list->head;
 
 	for(size_t i = 0; i < list->size; i++) {
@@ -164,11 +175,13 @@ bool ll_remove(DoublyLinkedList* list, void* data) {
 	return false;
 }
 
-void* ll_get(DoublyLinkedList* list, size_t pos) {
+void* ll_get(DoublyLinkedList* list, size_t pos)
+{
 	return get_node(list, pos)->data;
 }
 
-void* ll_set(DoublyLinkedList* list, void* data, size_t pos) {
+void* ll_set(DoublyLinkedList* list, void* data, size_t pos)
+{
 	DLLNode* node = get_node(list, pos);
 	void* old_data = node->data;
 
@@ -177,7 +190,8 @@ void* ll_set(DoublyLinkedList* list, void* data, size_t pos) {
 	return old_data;
 }
 
-ssize_t ll_index_of(DoublyLinkedList* list, void* data) {
+ssize_t ll_index_of(DoublyLinkedList* list, void* data)
+{
 	DLLNode* curr_node = list->head;
 
 	for(size_t i = 0; i < list->size; i++) {
@@ -190,11 +204,13 @@ ssize_t ll_index_of(DoublyLinkedList* list, void* data) {
 	return -1;
 }
 
-bool ll_contains(DoublyLinkedList* list, void* data) {
+bool ll_contains(DoublyLinkedList* list, void* data)
+{
 	return ll_index_of(list, data) != -1;
 }
 
-void ll_clear(DoublyLinkedList* list) {
+void ll_clear(DoublyLinkedList* list)
+{
 	DLLNode *prev_node, *curr_node = list->head;
 
 	for(size_t i = 0; i < list->size; i++) {
@@ -206,7 +222,8 @@ void ll_clear(DoublyLinkedList* list) {
 	list->size = 0;
 }
 
-void ll_destroy(DoublyLinkedList* list) {
+void ll_destroy(DoublyLinkedList* list)
+{
 	ll_clear(list);
 	Free(list);
 }

@@ -21,11 +21,13 @@ static QueueNode* create_queue_node(void* data) {
 
 /* ---------------- Header Implementation ---------------- */
 
-Queue* queue_create() {
+Queue* queue_create()
+{
     return (Queue*) Calloc(1, sizeof(Queue));
 }
 
-void queue_enqueue(Queue* queue, void* data) {
+void queue_enqueue(Queue* queue, void* data)
+{
     QueueNode* node = create_queue_node(data);
 
 	if (queue->length == 0)
@@ -37,7 +39,8 @@ void queue_enqueue(Queue* queue, void* data) {
 	queue->length++;
 }
 
-void* queue_dequeue(Queue* queue) {
+void* queue_dequeue(Queue* queue)
+{
     QueueNode* node = queue->head;
 	void* data = node->data;
 
@@ -48,7 +51,8 @@ void* queue_dequeue(Queue* queue) {
 	return data;
 }
 
-void queue_destroy(Queue* queue) {
+void queue_destroy(Queue* queue)
+{
     QueueNode* curr_node = queue->head;
 	QueueNode* next_node;
 

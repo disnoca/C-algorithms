@@ -8,7 +8,8 @@
 
 #define ARRAY_LENGTH 10000
 
-static int* get_randomized_int_array(int length) {
+static int* get_randomized_int_array(int length)
+{
 	int* arr = Malloc(sizeof(int) * length);
 
 	for(int i = 0; i < length; i++)
@@ -17,7 +18,8 @@ static int* get_randomized_int_array(int length) {
 	return arr;
 }
 
-static int* get_sorted_int_array(int length) {
+static int* get_sorted_int_array(int length)
+{
 	int* arr = Malloc(sizeof(int) * length);
 
 	for(int i = 0; i < length; i++)
@@ -26,7 +28,8 @@ static int* get_sorted_int_array(int length) {
 	return arr;
 }
 
-static void test_linear_search(int length) {
+static void test_linear_search(int length)
+{
 	int* arr = get_randomized_int_array(length);
 
 	int target_pos = rand() % ARRAY_LENGTH;
@@ -35,7 +38,8 @@ static void test_linear_search(int length) {
 	Free(arr);
 }
 
-static void test_binary_search(int length) {
+static void test_binary_search(int length)
+{
 	int* arr = get_sorted_int_array(length);
 
 	int target_pos = rand() % ARRAY_LENGTH;
@@ -44,7 +48,8 @@ static void test_binary_search(int length) {
 	Free(arr);
 }
 
-int main(void) {
+int main(void)
+{
 	srand(time(NULL));
 	int length = ARRAY_LENGTH;
 

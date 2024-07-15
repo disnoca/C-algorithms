@@ -17,7 +17,8 @@ int curr_key, curr_val;
 #define DEREF_VAL(p)    (*((int*)(p)))
 
 
-unsigned long hash(const void* key) {
+unsigned long hash(const void* key)
+{
 	const char* s = key;
 	unsigned long hash = 0;
 	while (*s)
@@ -27,7 +28,8 @@ unsigned long hash(const void* key) {
 }
 
 
-__attribute__((unused)) static void print_hash_map_contents(HashMap* hm) {
+__attribute__((unused)) static void print_hash_map_contents(HashMap* hm)
+{
 	size_t measured_size = 0;
 	for(size_t i = 0; i < hm->capacity; i++) {
 		HMNode* curr_node = hm->buckets + i;
@@ -45,7 +47,8 @@ __attribute__((unused)) static void print_hash_map_contents(HashMap* hm) {
 		printf("Too many entries according to hash map's size (%ld)\n", hm->size);
 }
 
-static HashMap* create_hash_map_with_ascending_values() {
+static HashMap* create_hash_map_with_ascending_values()
+{
 	HashMap* hm = hm_create(hash);
 	hm_put(hm, REF_OF_KEY("zero"), REF_OF_VAL(0));
 	hm_put(hm, REF_OF_KEY("one"), REF_OF_VAL(1));
@@ -60,7 +63,8 @@ static HashMap* create_hash_map_with_ascending_values() {
 	return hm;
 }
 
-static void test_put_get() {
+static void test_put_get()
+{
 	HashMap* hm = create_hash_map_with_ascending_values();
 
 	assert(DEREF_VAL(hm_get(hm, REF_OF_KEY("zero"))) == 0);
@@ -78,7 +82,8 @@ static void test_put_get() {
 	hm_destroy(hm);
 }
 
-static void test_rehash() {
+static void test_rehash()
+{
 	HashMap* hm = create_hash_map_with_ascending_values();
 	hm_put(hm, REF_OF_KEY("ten"), REF_OF_VAL(10));
 	hm_put(hm, REF_OF_KEY("eleven"), REF_OF_VAL(11));
@@ -99,7 +104,8 @@ static void test_rehash() {
 	hm_destroy(hm);
 }
 
-static void test_remove() {
+static void test_remove()
+{
 	HashMap* hm = create_hash_map_with_ascending_values();
 
 	assert(DEREF_VAL(hm_remove(hm, REF_OF_KEY("zero"))) == 0);
@@ -111,7 +117,8 @@ static void test_remove() {
 	hm_destroy(hm);
 }
 
-static void test_replace() {
+static void test_replace()
+{
 	HashMap* hm = create_hash_map_with_ascending_values();
 
 	assert(DEREF_VAL(hm_replace(hm, REF_OF_KEY("zero"), REF_OF_VAL(10))) == 0);
@@ -126,7 +133,8 @@ static void test_replace() {
 	hm_destroy(hm);
 }
 
-static void test_clear() {
+static void test_clear()
+{
 	HashMap* hm = create_hash_map_with_ascending_values();
 	hm_clear(hm);
 
@@ -137,7 +145,8 @@ static void test_clear() {
 	hm_destroy(hm);
 }
 
-int main() {
+int main()
+{
 	test_put_get();
 	test_rehash();
 	test_remove();

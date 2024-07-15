@@ -12,7 +12,8 @@ int curr_val;
 #define DEREF(p)    (*((int*)(p)))
 
 
-static bool check_list_integrity(DoublyLinkedList* list) {
+static bool check_list_integrity(DoublyLinkedList* list)
+{
     if (list->size == 0) 
 		return true;
 
@@ -47,7 +48,8 @@ static bool check_list_integrity(DoublyLinkedList* list) {
     return true;
 }
 
-__attribute__((unused)) static void print_list_contents(DoublyLinkedList* list) {
+__attribute__((unused)) static void print_list_contents(DoublyLinkedList* list)
+{
     DLLNode* curr_node = list->head;
     for(size_t i = 0; i < list->size; i++) {
         printf("%d ", DEREF(curr_node->data));
@@ -56,14 +58,16 @@ __attribute__((unused)) static void print_list_contents(DoublyLinkedList* list) 
     printf("\n");
 }
 
-static DoublyLinkedList* list_create_with_ascending_ints(int size) {
+static DoublyLinkedList* list_create_with_ascending_ints(int size)
+{
     DoublyLinkedList* list = ll_create();
     for(int i = 0; i < size; i++)
         ll_add(list, REF_OF(i));
     return list;
 }
 
-static void test_add() {
+static void test_add()
+{
     DoublyLinkedList* list = ll_create();
     ll_add(list, REF_OF(1));
     ll_add(list, REF_OF(2));
@@ -80,7 +84,8 @@ static void test_add() {
     ll_destroy(list);
 }
 
-static void test_add_at() {
+static void test_add_at()
+{
     int a = 10, b = 20, c = 30, d = 40, e = 50, f=60;
     DoublyLinkedList* list = list_create_with_ascending_ints(10);
     ll_add_at(list, &a, 0);
@@ -104,7 +109,8 @@ static void test_add_at() {
     ll_destroy(list);
 }
 
-static void test_get() {
+static void test_get()
+{
     DoublyLinkedList* list = list_create_with_ascending_ints(10);
 
     assert(DEREF(ll_get(list, 0)) == 0);
@@ -116,7 +122,8 @@ static void test_get() {
     ll_destroy(list);
 }
 
-static void test_remove_at() {
+static void test_remove_at()
+{
     DoublyLinkedList* list = list_create_with_ascending_ints(10);
 
 	assert(DEREF(ll_remove_at(list, 9)) == 9);
@@ -133,7 +140,8 @@ static void test_remove_at() {
     ll_destroy(list);
 }
 
-static void test_remove() {
+static void test_remove()
+{
     DoublyLinkedList* list = list_create_with_ascending_ints(10);
 
     assert(ll_remove(list, ll_get(list, 0)));
@@ -150,7 +158,8 @@ static void test_remove() {
     ll_destroy(list);
 }
 
-static void test_set() {
+static void test_set()
+{
     DoublyLinkedList* list = list_create_with_ascending_ints(10);
     
 	assert(DEREF(ll_set(list, REF_OF(10), 0)) == 0);
@@ -166,7 +175,8 @@ static void test_set() {
     ll_destroy(list);
 }
 
-static void test_index_of() {
+static void test_index_of()
+{
     DoublyLinkedList* list = list_create_with_ascending_ints(10);
 
     assert(ll_index_of(list, ll_get(list, 0)) == 0);
@@ -180,7 +190,8 @@ static void test_index_of() {
     ll_destroy(list);
 }
 
-int main() {
+int main()
+{
     test_add();
     test_add_at();
 	test_get();

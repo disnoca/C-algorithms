@@ -14,9 +14,8 @@ typedef struct {
 /* ---------------- Functions ---------------- */
 
 Heap* heap_create(size_t initial_capacity, int(*compare)(void*, void*));
+void heap_destroy(Heap* heap);
 
 void heap_insert(Heap* heap, void* data);
-
 void* heap_extract(Heap* heap);
 
-void heap_destroy(Heap* heap);

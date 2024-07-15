@@ -12,13 +12,15 @@ int curr_val;
 #define DEREF(p)    (*((int*)(p)))
 
 
-__attribute__((unused)) static void print_da_contents(DynamicArray* da) {
+__attribute__((unused)) static void print_da_contents(DynamicArray* da)
+{
     for(size_t i = 0; i < da->size; i++)
         printf("%d ", DEREF(da->arr[i]));
     printf("\n");
 }
 
-static DynamicArray* da_create_with_ascending_ints(int size) {
+static DynamicArray* da_create_with_ascending_ints(int size)
+{
     DynamicArray* da = da_create(size);
     for(int i = 0; i < size; i++)
         da_add(da, REF_OF(i));
@@ -26,7 +28,8 @@ static DynamicArray* da_create_with_ascending_ints(int size) {
     return da;
 }
 
-static void test_add() {
+static void test_add()
+{
     DynamicArray* da = da_create(5);
     for(int i = 0; i < 11; i++)
 		da_add(da, REF_OF(i));
@@ -40,7 +43,8 @@ static void test_add() {
     da_destroy(da);
 }
 
-static void test_add_at() {
+static void test_add_at()
+{
     DynamicArray* da = da_create_with_ascending_ints(10);
 	da_add_at(da, REF_OF(10), 10);
 	da_add_at(da, REF_OF(5), 5);
@@ -58,7 +62,8 @@ static void test_add_at() {
     da_destroy(da);
 }
 
-static void test_get() {
+static void test_get()
+{
     DynamicArray* da = da_create_with_ascending_ints(10);
 
 	assert(DEREF(da_get(da, 0)) == 0);
@@ -68,7 +73,8 @@ static void test_get() {
     da_destroy(da);
 }
 
-static void test_remove_at() {
+static void test_remove_at()
+{
     DynamicArray* da = da_create_with_ascending_ints(10);
 
 	assert(DEREF(da_remove_last(da)) == 9);
@@ -86,7 +92,8 @@ static void test_remove_at() {
     da_destroy(da);
 }
 
-static void test_remove() {
+static void test_remove()
+{
     DynamicArray* da = da_create_with_ascending_ints(10);
 
 	assert(da_remove(da, da_get(da, 9)));
@@ -100,7 +107,8 @@ static void test_remove() {
     da_destroy(da);
 }
 
-static void test_set() {
+static void test_set()
+{
     DynamicArray* da = da_create_with_ascending_ints(10);
 
 	assert(DEREF(da_set(da, REF_OF(0), 0)) == 0);
@@ -113,7 +121,8 @@ static void test_set() {
     da_destroy(da);
 }
 
-static void test_index_of() {
+static void test_index_of()
+{
     DynamicArray* da = da_create_with_ascending_ints(10);
 
 	assert(da_index_of(da, da_get(da, 0)) == 0);
@@ -124,7 +133,8 @@ static void test_index_of() {
     da_destroy(da);
 }
 
-int main() {
+int main()
+{
     test_add();
     test_add_at();
 	test_get();

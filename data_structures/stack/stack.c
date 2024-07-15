@@ -21,18 +21,21 @@ static StackNode* create_stack_node(void* data) {
 
 /* ---------------- Header Implementation ---------------- */
 
-Stack* stack_create() {
+Stack* stack_create()
+{
     return (Stack*) Calloc(1, sizeof(Stack));
 }
 
-void stack_push(Stack* stack, void* data) {
+void stack_push(Stack* stack, void* data)
+{
     StackNode* node = create_stack_node(data);
     node->prev = stack->tail;
     stack->tail = node;
     stack->size++;
 }
 
-void* stack_pop(Stack* stack) {
+void* stack_pop(Stack* stack)
+{
     StackNode* node = stack->tail;
     void* data = node->data;
 
@@ -48,7 +51,8 @@ void* stack_peek(Stack* stack)
     return stack->tail->data;
 }
 
-void stack_destroy(Stack* stack) {
+void stack_destroy(Stack* stack)
+{
     StackNode* curr_node = stack->tail;
     StackNode* next_node = NULL;
 
