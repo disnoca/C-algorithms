@@ -45,11 +45,21 @@ static void link_nodes(DLLNode* node1, DLLNode* node2)
 	node2->prev = node1;
 }
 
+
 /* ---------------- Header Implementation ---------------- */
 
-DoublyLinkedList* ll_create()
+void ll_init(DoublyLinkedList* list)
 {
-	return (DoublyLinkedList*) Calloc(1, sizeof(DoublyLinkedList));
+	list->head = NULL;
+	list->tail = NULL;
+	list->size = 0;
+}
+
+DoublyLinkedList* ll_create(void)
+{
+	DoublyLinkedList* list = (DoublyLinkedList*) Malloc(sizeof(DoublyLinkedList));
+	ll_init(list);
+	return list;
 }
 
 void ll_add(DoublyLinkedList* list, void* data)
@@ -222,8 +232,13 @@ void ll_clear(DoublyLinkedList* list)
 	list->size = 0;
 }
 
-void ll_destroy(DoublyLinkedList* list)
+void ll_free(DoublyLinkedList* list)
 {
 	ll_clear(list);
+}
+
+void ll_destroy(DoublyLinkedList* list)
+{
+	ll_free(list);
 	Free(list);
 }

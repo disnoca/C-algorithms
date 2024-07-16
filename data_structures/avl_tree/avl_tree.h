@@ -17,18 +17,19 @@ typedef struct {
 
 /* ---------------- Functions ---------------- */
 
+void avlt_init(AVLTree* tree, int(*compare)(void*, void*));
+void avlt_free(AVLTree* tree);
 AVLTree* avlt_create(int(*compare)(void*, void*));
-void avlt_destroy();
-void avlt_clear();
+void avlt_destroy(AVLTree* tree);
 
 void avlt_add(AVLTree* tree, void* data);
 void* avlt_remove(AVLTree* tree, void* data);
 void* avlt_get(AVLTree* tree, void* data);
 int avlt_contains(AVLTree* tree, void* data);
+void avlt_clear(AVLTree* tree);
 
 
 /* TODO:
 * - Change into key-value pairs
-* - init, free 
 * - put, min, max, predecessor, successor
 */

@@ -13,9 +13,10 @@ typedef struct {
 
 /* ---------------- Functions ---------------- */
 
+void da_init(DynamicArray* da, size_t initial_capacity);
+void da_free(DynamicArray* da);
 DynamicArray* da_create(size_t initial_capacity);
 void da_destroy(DynamicArray* da);
-void da_clear(DynamicArray* da);
 
 void da_add(DynamicArray* da, void* data);
 void da_add_at(DynamicArray* da, void* data, size_t pos);
@@ -29,3 +30,5 @@ void* da_set(DynamicArray* da, void* data, size_t pos);
 
 ssize_t da_index_of(DynamicArray* da, void* data);
 bool da_contains(DynamicArray* da, void* data);
+
+void da_clear(DynamicArray* da);

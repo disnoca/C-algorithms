@@ -17,16 +17,21 @@ static void resize(DynamicArray* da)
 	da->arr = Realloc(da->arr, sizeof(void*) * da->capacity);
 }
 
+
 /* ---------------- Header Implementation ---------------- */
+
+void da_init(DynamicArray* da, size_t initial_capacity)
+{
+	da->arr = (void**) Malloc(sizeof(void*) * initial_capacity);
+	da->size = 0;
+	da->capacity = initial_capacity;
+
+}
 
 DynamicArray* da_create(size_t inital_capacity)
 {
-	DynamicArray* da =  (DynamicArray*) Malloc(sizeof(DynamicArray));
-
-	da->arr = (void**) Malloc(sizeof(void*) * inital_capacity);
-	da->size = 0;
-	da->capacity = inital_capacity;
-
+	DynamicArray* da = (DynamicArray*) Malloc(sizeof(DynamicArray));
+	da_init(da, inital_capacity);
 	return da;
 }
 
@@ -115,8 +120,13 @@ void da_clear(DynamicArray* da)
 	da->size = 0;
 }
 
-void da_destroy(DynamicArray* da)
+void da_free(DynamicArray* da)
 {
 	Free(da->arr);
+}
+
+void da_destroy(DynamicArray* da)
+{
+	da_free(da);
 	Free(da);
 }

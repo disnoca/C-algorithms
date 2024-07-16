@@ -20,14 +20,16 @@ typedef struct {
 
 /* ---------------- Functions ---------------- */
 
+void hm_init(HashMap* hash_map, unsigned long(*hash)(const void*));
+void hm_free(HashMap* hash_map);
 HashMap* hm_create(unsigned long(*hash)(const void*));
 void hm_destroy(HashMap* hash_map);
-void hm_clear(HashMap* hash_map);
 
 void hm_put(HashMap* hash_map, void* key, void* value);
 void* hm_remove(HashMap* hash_map, void* key);
 void* hm_get(HashMap* hash_map, void* key);
 void* hm_replace(HashMap* hash_map, void* key, void* value);
 
+void hm_clear(HashMap* hash_map);
 
 // TODO: put returns old value

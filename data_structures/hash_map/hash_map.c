@@ -85,15 +85,19 @@ static void put_entry(HashMap* hm, void* key, void* value)
 
 /* ---------------- Header Implementation ---------------- */
 
+void hm_init(HashMap* hash_map, unsigned long(*hash)(const void*))
+{
+    hash_map->buckets = (HMNode*) Calloc(DEFUALT_INITIAL_CAPACITY, sizeof(HMNode));
+    hash_map->capacity = DEFUALT_INITIAL_CAPACITY;
+    hash_map->load_factor = DEFAULT_LOAD_FACTOR;
+    hash_map->size = 0;
+    hash_map->hash = hash;
+}
+
 HashMap* hm_create(unsigned long(*hash)(const void*))
 {
-    HashMap* hm = (HashMap*) Calloc(1, sizeof(HashMap));
-
-    hm->capacity = DEFUALT_INITIAL_CAPACITY;
-    hm->load_factor = DEFAULT_LOAD_FACTOR;
-    hm->buckets = (HMNode*) Calloc(DEFUALT_INITIAL_CAPACITY, sizeof(HMNode));
-    hm->hash = hash;
-
+    HashMap* hm = (HashMap*) Malloc(sizeof(HashMap));
+    hm_init(hm, hash);
     return hm;
 }
 
@@ -163,9 +167,14 @@ void hm_clear(HashMap* hm)
     hm->size = 0;
 }
 
+void hm_free(HashMap* hash_map)
+{
+    hm_clear(hash_map);
+    Free(hash_map->buckets);
+}
+
 void hm_destroy(HashMap* hm)
 {
-    hm_clear(hm);
-    Free(hm->buckets);
+    hm_free(hm);
     Free(hm);
 }

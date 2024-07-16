@@ -216,6 +216,7 @@ static void update_balance_on_remove(AVLTree* tree, AVLTreeNode* node)
 	}
 }
 
+
 /* ---------------- Helper Functions ---------------- */
 
 static AVLTreeNode* create_node(void* data)
@@ -269,12 +270,20 @@ static AVLTreeNode* get_successor_node(AVLTreeNode* node)
 	return node;
 }
 
+
 /* ---------------- Header Implementation ---------------- */
+
+void avlt_init(AVLTree* tree, int(*compare)(void*, void*))
+{
+	tree->root = NULL;
+	tree->size = 0;
+	tree->compare = compare;
+}
 
 AVLTree* avlt_create(int(*compare)(void*, void*))
 {
-	AVLTree* tree = (AVLTree*) Calloc(1, sizeof(AVLTree));
-	tree->compare = compare;
+	AVLTree* tree = (AVLTree*) Malloc(sizeof(AVLTree));
+	avlt_init(tree, compare);
 	return tree;
 }
 
@@ -366,8 +375,13 @@ void avlt_clear(AVLTree* tree)
 	Free(nodes);
 }
 
-void avlt_destroy(AVLTree* tree)
+void avlt_free(AVLTree* tree)
 {
 	avlt_clear(tree);
+}
+
+void avlt_destroy(AVLTree* tree)
+{
+	avlt_free(tree);
 	Free(tree);
 }

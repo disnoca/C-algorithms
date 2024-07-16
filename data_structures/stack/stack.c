@@ -21,9 +21,17 @@ static StackNode* create_stack_node(void* data) {
 
 /* ---------------- Header Implementation ---------------- */
 
+void stack_init(Stack* stack)
+{
+    stack->tail = NULL;
+    stack->size = 0;
+}
+
 Stack* stack_create()
 {
-    return (Stack*) Calloc(1, sizeof(Stack));
+    Stack* stack = Malloc(sizeof(Stack));
+    stack_init(stack);
+    return stack;
 }
 
 void stack_push(Stack* stack, void* data)
@@ -51,7 +59,7 @@ void* stack_peek(Stack* stack)
     return stack->tail->data;
 }
 
-void stack_destroy(Stack* stack)
+void stack_clear(Stack* stack)
 {
     StackNode* curr_node = stack->tail;
     StackNode* next_node = NULL;
@@ -62,5 +70,17 @@ void stack_destroy(Stack* stack)
         curr_node = next_node;
     }
 
+    stack->tail = NULL;
+    stack->size = 0;
+}
+
+void stack_free(Stack* stack)
+{
+    stack_clear(stack);
+}
+
+void stack_destroy(Stack* stack)
+{
+    stack_free(stack);
     Free(stack);
 }
