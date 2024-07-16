@@ -27,6 +27,11 @@ unsigned long hash(const void* key)
 	return hash;
 }
 
+bool key_is_eq(void* key1, void* key2)
+{
+	return !strcmp((char*)key1, (char*)key2);
+}
+
 
 __attribute__((unused)) static void print_hash_map_contents(HashMap* hm)
 {
@@ -49,7 +54,7 @@ __attribute__((unused)) static void print_hash_map_contents(HashMap* hm)
 
 static HashMap* create_hash_map_with_ascending_values()
 {
-	HashMap* hm = hm_create(hash);
+	HashMap* hm = hm_create(hash, key_is_eq);
 	hm_put(hm, REF_OF_KEY("zero"), REF_OF_VAL(0));
 	hm_put(hm, REF_OF_KEY("one"), REF_OF_VAL(1));
 	hm_put(hm, REF_OF_KEY("two"), REF_OF_VAL(2));
@@ -76,7 +81,14 @@ static void test_put_get()
 	assert(DEREF_VAL(hm_get(hm, REF_OF_KEY("seven"))) == 7);
 	assert(DEREF_VAL(hm_get(hm, REF_OF_KEY("eight"))) == 8);
 	assert(DEREF_VAL(hm_get(hm, REF_OF_KEY("nine"))) == 9);
-	assert(hm->size == 10);
+
+	assert(DEREF_VAL(hm_put(hm, REF_OF_KEY("zero"), REF_OF_VAL(10))) == 0);
+	assert(DEREF_VAL(hm_get(hm, REF_OF_KEY("zero"))) == 10);
+	assert(hm_get(hm, REF_OF_KEY("ten")) == NULL);
+	assert(hm_put(hm, REF_OF_KEY("ten"), REF_OF_VAL(10)) == NULL);
+	assert(DEREF_VAL(hm_get(hm, REF_OF_KEY("ten"))) == 10);
+
+	assert(hm->size == 11);
 
 	hm_clear(hm);
 	hm_destroy(hm);
@@ -111,6 +123,7 @@ static void test_remove()
 	assert(DEREF_VAL(hm_remove(hm, REF_OF_KEY("zero"))) == 0);
 	assert(DEREF_VAL(hm_remove(hm, REF_OF_KEY("five"))) == 5);
 	assert(DEREF_VAL(hm_remove(hm, REF_OF_KEY("nine"))) == 9);
+	assert(hm_remove(hm, REF_OF_KEY("ten")) == NULL);
 	assert(hm->size == 7);
 
 	hm_clear(hm);
@@ -124,6 +137,7 @@ static void test_replace()
 	assert(DEREF_VAL(hm_replace(hm, REF_OF_KEY("zero"), REF_OF_VAL(10))) == 0);
 	assert(DEREF_VAL(hm_replace(hm, REF_OF_KEY("five"), REF_OF_VAL(15))) == 5);
 	assert(DEREF_VAL(hm_replace(hm, REF_OF_KEY("nine"), REF_OF_VAL(19))) == 9);
+	assert(hm_replace(hm, REF_OF_KEY("ten"), REF_OF_VAL(19)) == NULL);
 	assert(DEREF_VAL(hm_get(hm, REF_OF_KEY("zero"))) == 10);
 	assert(DEREF_VAL(hm_get(hm, REF_OF_KEY("five"))) == 15);
 	assert(DEREF_VAL(hm_get(hm, REF_OF_KEY("nine"))) == 19);
