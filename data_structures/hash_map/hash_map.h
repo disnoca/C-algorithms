@@ -32,7 +32,4 @@ void* hm_put(HashMap* hash_map, void* key, void* value);
 void* hm_remove(HashMap* hash_map, void* key);
 void* hm_get(HashMap* hash_map, void* key);
 void* hm_replace(HashMap* hash_map, void* key, void* value);
-
 void hm_clear(HashMap* hash_map);
-
-// TODO: put returns old value

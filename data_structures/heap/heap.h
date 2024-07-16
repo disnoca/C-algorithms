@@ -21,6 +21,4 @@ void heap_destroy(Heap* heap);
 
 void heap_insert(Heap* heap, void* data);
 void* heap_extract(Heap* heap);
-
-// TODO: peek
-
+void* heap_peek(Heap* heap);

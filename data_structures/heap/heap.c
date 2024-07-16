@@ -77,6 +77,11 @@ void* heap_extract(Heap* h)
 	return data;
 }
 
+void* heap_peek(Heap* heap)
+{
+	return heap->arr[0];
+}
+
 void heap_free(Heap* heap)
 {
 	Free(heap->arr);
