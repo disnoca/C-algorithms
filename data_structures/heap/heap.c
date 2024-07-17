@@ -25,12 +25,12 @@ static void swap(void** pos1, void** pos2)
 
 /* ---------------- Header Implementation ---------------- */
 
-void heap_init(Heap* heap, size_t initial_capacity, int(*compare)(void*, void*))
+void heap_init(Heap* h, size_t initial_capacity, int(*compare)(void*, void*))
 {
-	heap->arr = (void**) Malloc(sizeof(void*) * initial_capacity);
-	heap->size = 0;
-	heap->capacity = initial_capacity;
-	heap->compare = compare;
+	h->arr = (void**) Malloc(sizeof(void*) * initial_capacity);
+	h->size = 0;
+	h->capacity = initial_capacity;
+	h->compare = compare;
 
 }
 
@@ -77,18 +77,28 @@ void* heap_extract(Heap* h)
 	return data;
 }
 
-void* heap_peek(Heap* heap)
+void* heap_peek(Heap* h)
 {
-	return heap->arr[0];
+	return h->arr[0];
 }
 
-void heap_free(Heap* heap)
+void heap_clear(Heap* h, bool free_data)
 {
-	Free(heap->arr);
+	if (free_data)
+		for (size_t i = 0; i < h->size; i++)
+			Free(h->arr[i]);
+
+	h->size = 0;
 }
 
-void heap_destroy(Heap* h)
+void heap_free(Heap* h, bool free_data)
 {
-	heap_free(h);
+	heap_clear(h, free_data);
+	Free(h->arr);
+}
+
+void heap_destroy(Heap* h, bool free_data)
+{
+	heap_free(h, free_data);
 	Free(h);
 }

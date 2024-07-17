@@ -27,7 +27,7 @@ unsigned long hash(const void* key)
 	return hash;
 }
 
-bool key_is_eq(void* key1, void* key2)
+bool equals(void* key1, void* key2)
 {
 	return !strcmp((char*)key1, (char*)key2);
 }
@@ -54,7 +54,7 @@ __attribute__((unused)) static void print_hash_map_contents(HashMap* hm)
 
 static HashMap* create_hash_map_with_ascending_values()
 {
-	HashMap* hm = hm_create(hash, key_is_eq);
+	HashMap* hm = hm_create(hash, equals);
 	hm_put(hm, REF_OF_KEY("zero"), REF_OF_VAL(0));
 	hm_put(hm, REF_OF_KEY("one"), REF_OF_VAL(1));
 	hm_put(hm, REF_OF_KEY("two"), REF_OF_VAL(2));
@@ -90,8 +90,7 @@ static void test_put_get()
 
 	assert(hm->size == 11);
 
-	hm_clear(hm);
-	hm_destroy(hm);
+	hm_destroy(hm, false, false);
 }
 
 static void test_rehash()
@@ -112,8 +111,7 @@ static void test_rehash()
 	assert(hm->size == 17);
 	assert(hm->capacity == 32);
 	
-	hm_clear(hm);
-	hm_destroy(hm);
+	hm_destroy(hm, false, false);
 }
 
 static void test_remove()
@@ -126,8 +124,7 @@ static void test_remove()
 	assert(hm_remove(hm, REF_OF_KEY("ten")) == NULL);
 	assert(hm->size == 7);
 
-	hm_clear(hm);
-	hm_destroy(hm);
+	hm_destroy(hm, false, false);
 }
 
 static void test_replace()
@@ -143,29 +140,28 @@ static void test_replace()
 	assert(DEREF_VAL(hm_get(hm, REF_OF_KEY("nine"))) == 19);
 	assert(hm->size == 10);
 
-	hm_clear(hm);
-	hm_destroy(hm);
+	hm_destroy(hm, false, false);
 }
 
 static void test_clear()
 {
 	HashMap* hm = create_hash_map_with_ascending_values();
-	hm_clear(hm);
+	hm_clear(hm, false, false);
 
 	assert(hm->size == 0);
 	for(int i = 0; i < 10; i++)
 		assert(!memcmp(hm->buckets+i, &EMPTY_NODE, sizeof(HMNode)));
 
-	hm_destroy(hm);
+	hm_destroy(hm, false, false);
 }
 
 int main()
 {
+	test_clear();
 	test_put_get();
 	test_rehash();
 	test_remove();
 	test_replace();
-	test_clear();
 
 	assert(malloc_calls == free_calls);
 

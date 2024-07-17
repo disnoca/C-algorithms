@@ -115,18 +115,23 @@ bool da_contains(DynamicArray* da, void* data)
 	return da_index_of(da, data) != -1;
 }
 
-void da_clear(DynamicArray* da)
+void da_clear(DynamicArray* da, bool free_data)
 {
+	if (free_data)
+		for (size_t i = 0; i < da->size; i++)
+			Free(da->arr[i]);
+
 	da->size = 0;
 }
 
-void da_free(DynamicArray* da)
+void da_free(DynamicArray* da, bool free_data)
 {
+	da_clear(da, free_data);
 	Free(da->arr);
 }
 
-void da_destroy(DynamicArray* da)
+void da_destroy(DynamicArray* da, bool free_data)
 {
-	da_free(da);
+	da_free(da, free_data);
 	Free(da);
 }

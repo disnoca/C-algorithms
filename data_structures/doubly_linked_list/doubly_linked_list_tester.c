@@ -81,7 +81,7 @@ static void test_add()
     assert(list->size == 4);
     
     assert(check_list_integrity(list));
-    ll_destroy(list);
+    ll_destroy(list, false);
 }
 
 static void test_add_at()
@@ -106,7 +106,7 @@ static void test_add_at()
     assert(DEREF(ll_get(list, 14)) == 9);
 
     assert(check_list_integrity(list));
-    ll_destroy(list);
+    ll_destroy(list, false);
 }
 
 static void test_get()
@@ -119,7 +119,7 @@ static void test_get()
     assert(list->size==10);
 
     assert(check_list_integrity(list));
-    ll_destroy(list);
+    ll_destroy(list, false);
 }
 
 static void test_remove_at()
@@ -137,7 +137,7 @@ static void test_remove_at()
     assert(list->size==5);
 
     assert(check_list_integrity(list));
-    ll_destroy(list);
+    ll_destroy(list, false);
 }
 
 static void test_remove()
@@ -155,7 +155,7 @@ static void test_remove()
     assert(list->size==7);
 
     assert(check_list_integrity(list));
-    ll_destroy(list);
+    ll_destroy(list, false);
 }
 
 static void test_set()
@@ -172,7 +172,7 @@ static void test_set()
     assert(DEREF(ll_get(list, 8)) == 8);
 
     assert(check_list_integrity(list));
-    ll_destroy(list);
+    ll_destroy(list, false);
 }
 
 static void test_index_of()
@@ -187,7 +187,7 @@ static void test_index_of()
     assert(ll_index_of(list, ll_get(list, 9)) == 9);
 
     assert(check_list_integrity(list));
-    ll_destroy(list);
+    ll_destroy(list, false);
 }
 
 int main()

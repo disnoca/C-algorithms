@@ -60,13 +60,14 @@ void* queue_dequeue(Queue* queue)
 	return data;
 }
 
-void queue_clear(Queue* queue)
+void queue_clear(Queue* queue, bool free_data)
 {
 	QueueNode* curr_node = queue->head;
 	QueueNode* next_node;
 
 	while (curr_node != NULL) {
 		next_node = curr_node->next;
+		if (free_data) Free(curr_node->data);
 		Free(curr_node);
 		curr_node = next_node;
 	}
@@ -76,13 +77,13 @@ void queue_clear(Queue* queue)
 	queue->length = 0;
 }
 
-void queue_free(Queue* queue)
+void queue_free(Queue* queue, bool free_data)
 {
-	queue_clear(queue);
+	queue_clear(queue, free_data);
 }
 
-void queue_destroy(Queue* queue)
+void queue_destroy(Queue* queue, bool free_data)
 {
-	queue_free(queue);
+	queue_free(queue, free_data);
 	Free(queue);
 }

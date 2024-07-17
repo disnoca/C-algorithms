@@ -71,7 +71,7 @@ static HMNode* get_node(HashMap* hm, void* key)
 	if (BUCKET_IS_EMPTY(node))
 		return NULL;
 
-	while (node != NULL && !hm->key_is_eq(node->key, key))
+	while (node != NULL && !hm->equals(node->key, key))
 		node = node->next;
 
 	return node;
@@ -88,7 +88,7 @@ static void* put_entry(HashMap* hm, void* key, void* value)
 
 	HMNode* prev_node = NULL;
 	while (curr_node != NULL) {
-		if (hm->key_is_eq(curr_node->key, key)) {
+		if (hm->equals(curr_node->key, key)) {
 			void* old_val = curr_node->value;
 			curr_node->value = value;
 			return old_val;
@@ -104,20 +104,20 @@ static void* put_entry(HashMap* hm, void* key, void* value)
 
 /* ---------------- Header Implementation ---------------- */
 
-void hm_init(HashMap* hm, unsigned long(*hash)(const void*), bool(*key_is_eq)(void*,void*))
+void hm_init(HashMap* hm, unsigned long(*hash)(const void*), bool(*equals)(void*,void*))
 {
 	hm->buckets = (HMNode*) Calloc(DEFUALT_INITIAL_CAPACITY, sizeof(HMNode));
 	hm->capacity = DEFUALT_INITIAL_CAPACITY;
 	hm->load_factor = DEFAULT_LOAD_FACTOR;
 	hm->size = 0;
 	hm->hash = hash;
-	hm->key_is_eq = key_is_eq;
+	hm->equals = equals;
 }
 
-HashMap* hm_create(unsigned long(*hash)(const void*), bool(*key_is_eq)(void*,void*))
+HashMap* hm_create(unsigned long(*hash)(const void*), bool(*equals)(void*,void*))
 {
 	HashMap* hm = (HashMap*) Malloc(sizeof(HashMap));
-	hm_init(hm, hash, key_is_eq);
+	hm_init(hm, hash, equals);
 	return hm;
 }
 
@@ -141,7 +141,7 @@ void* hm_remove(HashMap* hm, void* key)
 		return NULL;
 
 	HMNode* prev_node = NULL;
-	while (curr_node != NULL && !hm->key_is_eq(curr_node->key, key)) {
+	while (curr_node != NULL && !hm->equals(curr_node->key, key)) {
 		prev_node = curr_node;
 		curr_node = curr_node->next;
 	}
@@ -179,7 +179,7 @@ void* hm_replace(HashMap* hm, void* key, void* value)
 
 }
 
-void hm_clear(HashMap* hm)
+void hm_clear(HashMap* hm, bool free_keys, bool free_values)
 {
 	HMNode* buckets = hm->buckets;
 	size_t capacity = hm->capacity;
@@ -195,6 +195,8 @@ void hm_clear(HashMap* hm)
 		while (next_node != NULL) {
 			curr_node = next_node;
 			next_node = curr_node->next;
+			if (free_keys) Free(curr_node->key);
+			if (free_values) Free(curr_node->value);
 			Free(curr_node);       // only free the subsequent nodes because the buckets themselves must stay
 		}
 	}
@@ -202,14 +204,14 @@ void hm_clear(HashMap* hm)
 	hm->size = 0;
 }
 
-void hm_free(HashMap* hash_map)
+void hm_free(HashMap* hash_map, bool free_keys, bool free_values)
 {
-	hm_clear(hash_map);
+	hm_clear(hash_map, free_keys, free_values);
 	Free(hash_map->buckets);
 }
 
-void hm_destroy(HashMap* hm)
+void hm_destroy(HashMap* hm, bool free_keys, bool free_values)
 {
-	hm_free(hm);
+	hm_free(hm, free_keys, free_values);
 	Free(hm);
 }

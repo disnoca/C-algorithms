@@ -57,7 +57,7 @@ static void test_insert()
 	assert(h->size == 14);
 
 	heap_sanity_test(h);
-    heap_destroy(h);
+    heap_destroy(h, false);
 }
 
 static void test_extract()
@@ -74,7 +74,7 @@ static void test_extract()
 	for (int i = 10; i >= 0; i--)
 		assert(DEREF(heap_extract(h)) == i);
 
-    heap_destroy(h);
+    heap_destroy(h, false);
 }
 
 

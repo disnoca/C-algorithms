@@ -71,7 +71,7 @@ static void test_stack_push()
     assert(stack->size == 3);
 
     assert(check_stack_integrity(stack));
-    stack_destroy(stack);
+    stack_destroy(stack, false);
 }
 
 static void test_stack_pop()
@@ -83,7 +83,7 @@ static void test_stack_pop()
     assert(stack->size == 0);
 
     assert(check_stack_integrity(stack));
-    stack_destroy(stack);
+    stack_destroy(stack, false);
 }
 
 int main()

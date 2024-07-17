@@ -59,7 +59,7 @@ static void test_add_and_tree_structure()
 
 	assert(tree->size == 8);
 
-	avlt_destroy(tree);
+	avlt_destroy(tree, false, false);
 }
 
 static void test_add_and_balance_values()
@@ -87,7 +87,7 @@ static void test_add_and_balance_values()
 	assert(tree->root->right->balance == 0);
 	assert(tree->root->left->balance == -1);
 
-	avlt_destroy(tree);
+	avlt_destroy(tree, false, false);
 }
 
 static void test_get()
@@ -103,7 +103,7 @@ static void test_get()
 	assert(DEREF_VAL(avlt_get(tree, REF_OF_KEY("8"))) == 8);
 	assert(avlt_get(tree, REF_OF_KEY("0")) == 0);
 
-	avlt_destroy(tree);
+	avlt_destroy(tree, false, false);
 }
 
 static void test_remove_with_no_children()
@@ -120,7 +120,7 @@ static void test_remove_with_no_children()
 	assert(avlt_remove(tree, REF_OF_KEY("0")) == NULL);
 	assert(tree->size == 5);
 
-	avlt_destroy(tree);
+	avlt_destroy(tree, false, false);
 }
 
 static void test_remove_with_single_children()
@@ -143,7 +143,7 @@ static void test_remove_with_single_children()
 	assert(tree->root->balance == 0);
 	assert(tree->size == 7);
 
-	avlt_destroy(tree);
+	avlt_destroy(tree, false, false);
 }
 
 static void test_remove_with_double_children()
@@ -161,7 +161,7 @@ static void test_remove_with_double_children()
 	assert(tree->root->balance == 0);
 	assert(tree->root->right->balance == 1);
 
-	avlt_destroy(tree);
+	avlt_destroy(tree, false, false);
 }
 
 static void test_left_rotation_on_add()
@@ -182,7 +182,7 @@ static void test_left_rotation_on_add()
 	assert(tree->root->right->left->balance == 0);
 	assert(tree->root->right->right->balance == 0);
 
-	avlt_destroy(tree);
+	avlt_destroy(tree, false, false);
 }
 
 static void test_left_rotation_on_remove()
@@ -202,7 +202,7 @@ static void test_left_rotation_on_remove()
 	assert(tree->root->left->right->balance == 0);
 	assert(tree->root->right->balance == 0);
 
-	avlt_destroy(tree);
+	avlt_destroy(tree, false, false);
 }
 
 static void test_right_rotation_on_add()
@@ -223,7 +223,7 @@ static void test_right_rotation_on_add()
 	assert(tree->root->left->left->balance == 0);
 	assert(tree->root->left->right->balance == 0);
 
-	avlt_destroy(tree);
+	avlt_destroy(tree, false, false);
 }
 
 static void test_right_rotation_on_remove()
@@ -243,7 +243,7 @@ static void test_right_rotation_on_remove()
 	assert(tree->root->right->left->balance == 0);
 	assert(tree->root->left->balance == 0);
 
-	avlt_destroy(tree);
+	avlt_destroy(tree, false, false);
 }
 
 static void test_lr_rotation_on_add()
@@ -261,7 +261,7 @@ static void test_lr_rotation_on_add()
 	assert(tree->root->left->balance == 0);
 	assert(tree->root->right->balance == 0);
 
-	avlt_destroy(tree);
+	avlt_destroy(tree, false, false);
 }
 
 static void test_lr_rotation_on_remove()
@@ -287,7 +287,7 @@ static void test_lr_rotation_on_remove()
 	assert(tree->root->left->balance == 0);
 	assert(tree->root->right->balance == 1);
 
-	avlt_destroy(tree);
+	avlt_destroy(tree, false, false);
 }
 
 static void test_rl_rotation_on_add()
@@ -305,7 +305,7 @@ static void test_rl_rotation_on_add()
 	assert(tree->root->left->balance == 0);
 	assert(tree->root->right->balance == 0);
 
-	avlt_destroy(tree);
+	avlt_destroy(tree, false, false);
 }
 
 static void test_rl_rotation_on_remove()
@@ -331,7 +331,7 @@ static void test_rl_rotation_on_remove()
 	assert(tree->root->right->balance == 0);
 	assert(tree->root->left->balance == -1);
 
-	avlt_destroy(tree);
+	avlt_destroy(tree, false, false);
 }
 
 static void test_min_max()
@@ -354,7 +354,7 @@ static void test_min_max()
 	assert(DEREF_VAL(avlt_min(tree)) == 3);
 	assert(DEREF_VAL(avlt_max(tree)) == 9);
 
-	avlt_destroy(tree);
+	avlt_destroy(tree, false, false);
 }
 
 static void test_predecessor_successor()
@@ -389,7 +389,7 @@ static void test_predecessor_successor()
 	assert(avlt_successor(tree, "9") == NULL);
 	assert(avlt_predecessor(tree, "3") == NULL);
 
-	avlt_destroy(tree);
+	avlt_destroy(tree, false, false);
 }
 
 int main()

@@ -78,7 +78,7 @@ static void test_queue_enqueue()
 	assert(DEREF(queue->tail->data) == 12);
 
 	assert(check_queue_integrity(queue));
-	queue_destroy(queue);
+	queue_destroy(queue, false);
 }
 
 static void test_queue_dequeue()
@@ -90,7 +90,7 @@ static void test_queue_dequeue()
 	assert(queue->length == 0);
 
 	assert(check_queue_integrity(queue));
-	queue_destroy(queue);
+	queue_destroy(queue, false);
 }
 
 int main()

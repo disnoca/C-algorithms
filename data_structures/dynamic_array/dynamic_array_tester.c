@@ -40,7 +40,7 @@ static void test_add()
 	assert(da->size == 11);
 	assert(da->capacity == 20);
     
-    da_destroy(da);
+    da_destroy(da, false);
 }
 
 static void test_add_at()
@@ -59,7 +59,7 @@ static void test_add_at()
 	assert(da->size == 13);
 	assert(da->capacity == 20);
     
-    da_destroy(da);
+    da_destroy(da, false);
 }
 
 static void test_get()
@@ -70,7 +70,7 @@ static void test_get()
 	assert(DEREF(da_get(da, 5)) == 5);
 	assert(DEREF(da_get(da, 9)) == 9);
     
-    da_destroy(da);
+    da_destroy(da, false);
 }
 
 static void test_remove_at()
@@ -89,7 +89,7 @@ static void test_remove_at()
 	while (da->size > 0)
 		da_remove_last(da);
     
-    da_destroy(da);
+    da_destroy(da, false);
 }
 
 static void test_remove()
@@ -104,7 +104,7 @@ static void test_remove()
 	assert(DEREF(da_get(da, 6)) == 8);
 	assert(da->size == 7);
     
-    da_destroy(da);
+    da_destroy(da, false);
 }
 
 static void test_set()
@@ -118,7 +118,7 @@ static void test_set()
 	assert(DEREF(da_get(da, 5)) == 50);
 	assert(DEREF(da_get(da, 9)) == 90);
     
-    da_destroy(da);
+    da_destroy(da, false);
 }
 
 static void test_index_of()
@@ -130,7 +130,7 @@ static void test_index_of()
 	assert(da_index_of(da, da_get(da, 9)) == 9);
 	assert(da_index_of(da, REF_OF(10)) == -1);
     
-    da_destroy(da);
+    da_destroy(da, false);
 }
 
 int main()

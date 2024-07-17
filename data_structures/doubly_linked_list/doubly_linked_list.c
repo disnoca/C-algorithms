@@ -219,26 +219,27 @@ bool ll_contains(DoublyLinkedList* list, void* data)
 	return ll_index_of(list, data) != -1;
 }
 
-void ll_clear(DoublyLinkedList* list)
+void ll_clear(DoublyLinkedList* list, bool free_data)
 {
 	DLLNode *prev_node, *curr_node = list->head;
 
 	for(size_t i = 0; i < list->size; i++) {
 		prev_node = curr_node;
 		curr_node = curr_node->next;
+		if (free_data) Free(curr_node->data);
 		Free(prev_node);
 	}
 
 	list->size = 0;
 }
 
-void ll_free(DoublyLinkedList* list)
+void ll_free(DoublyLinkedList* list, bool free_data)
 {
-	ll_clear(list);
+	ll_clear(list, free_data);
 }
 
-void ll_destroy(DoublyLinkedList* list)
+void ll_destroy(DoublyLinkedList* list, bool free_data)
 {
-	ll_free(list);
+	ll_free(list, free_data);
 	Free(list);
 }

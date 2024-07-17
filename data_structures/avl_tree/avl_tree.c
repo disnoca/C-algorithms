@@ -449,7 +449,7 @@ void* avlt_successor(AVLTree* tree, void* key)
 	return NULL;
 }
 
-void avlt_clear(AVLTree* tree)
+void avlt_clear(AVLTree* tree, bool free_keys, bool free_values)
 {
 	if (tree->size == 0)
 		return;
@@ -467,6 +467,8 @@ void avlt_clear(AVLTree* tree)
 		if (curr_node->right != NULL)
 			nodes[i++] = curr_node->right;
 
+		if (free_keys) Free(curr_node->key);
+		if (free_values) Free(curr_node->value);
 		Free(curr_node);
 	}  while (j < i);
 
@@ -475,13 +477,13 @@ void avlt_clear(AVLTree* tree)
 	Free(nodes);
 }
 
-void avlt_free(AVLTree* tree)
+void avlt_free(AVLTree* tree, bool free_keys, bool free_values)
 {
-	avlt_clear(tree);
+	avlt_clear(tree, free_keys, free_values);
 }
 
-void avlt_destroy(AVLTree* tree)
+void avlt_destroy(AVLTree* tree, bool free_keys, bool free_values)
 {
-	avlt_free(tree);
+	avlt_free(tree, free_keys, free_values);
 	Free(tree);
 }

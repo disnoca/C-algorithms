@@ -59,13 +59,14 @@ void* stack_peek(Stack* stack)
     return stack->tail->data;
 }
 
-void stack_clear(Stack* stack)
+void stack_clear(Stack* stack, bool free_data)
 {
     StackNode* curr_node = stack->tail;
     StackNode* next_node = NULL;
 
     while (curr_node != NULL) {
         next_node = curr_node->prev;
+        if (free_data) Free(curr_node->data);
         Free(curr_node);
         curr_node = next_node;
     }
@@ -74,13 +75,13 @@ void stack_clear(Stack* stack)
     stack->size = 0;
 }
 
-void stack_free(Stack* stack)
+void stack_free(Stack* stack, bool free_data)
 {
-    stack_clear(stack);
+    stack_clear(stack, free_data);
 }
 
-void stack_destroy(Stack* stack)
+void stack_destroy(Stack* stack, bool free_data)
 {
-    stack_free(stack);
+    stack_free(stack, free_data);
     Free(stack);
 }

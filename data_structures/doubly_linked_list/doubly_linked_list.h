@@ -22,9 +22,9 @@ typedef struct {
 /* ---------------- Functions ---------------- */
 
 void ll_init(DoublyLinkedList* list);
-void ll_free(DoublyLinkedList* list);
+void ll_free(DoublyLinkedList* list, bool free_data);
 DoublyLinkedList* ll_create(void);
-void ll_destroy(DoublyLinkedList* list);
+void ll_destroy(DoublyLinkedList* list, bool free_data);
 
 void ll_add(DoublyLinkedList* list, void* data);
 void ll_add_first(DoublyLinkedList* list, void* data);
@@ -41,4 +41,4 @@ void* ll_set(DoublyLinkedList* list, void* data, size_t pos);
 ssize_t ll_index_of(DoublyLinkedList* list, void* data);
 bool ll_contains(DoublyLinkedList* list, void* data);
 
-void ll_clear(DoublyLinkedList* list);
+void ll_clear(DoublyLinkedList* list, bool free_data);
