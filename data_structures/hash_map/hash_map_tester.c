@@ -12,9 +12,9 @@ char keys[8192];
 int values[1024];
 int curr_key, curr_val;
 
-#define REF_OF_KEY(s)   ({ char* key_addr = keys + curr_key; strcpy(key_addr, s); curr_key += strlen(s) + 1; key_addr; })
+#define REF_OF_KEY(s)   ({ __typeof__ (s) _s = s; char* key_addr = keys + curr_key; strcpy(key_addr, _s); curr_key += strlen(_s) + 1; key_addr; })
 #define REF_OF_VAL(x)   ({ values[curr_val] = (x); values + curr_val++; })
-#define DEREF_VAL(p)    (*((int*)(p)))
+#define DEREF_VAL(p)    ({ __typeof__ (p) _p = p; assert((_p) != NULL); *((int*)(_p)); })
 
 
 unsigned long hash(const void* key)

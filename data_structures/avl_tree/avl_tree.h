@@ -5,31 +5,29 @@
 typedef struct AVLTreeNode {
     struct AVLTreeNode *parent, *left, *right;
     int balance;
-    void* data;
+    void *key, *value;
 } AVLTreeNode;
 
 typedef struct {
     AVLTreeNode *root;
     size_t size;
-    int(*compare)(void*, void*);
+    int(*compare)(void*,void*);
 } AVLTree;
 
 
 /* ---------------- Functions ---------------- */
 
-void avlt_init(AVLTree* tree, int(*compare)(void*, void*));
+void avlt_init(AVLTree* tree, int(*compare)(void*,void*));
 void avlt_free(AVLTree* tree);
 AVLTree* avlt_create(int(*compare)(void*, void*));
 void avlt_destroy(AVLTree* tree);
 
-void avlt_add(AVLTree* tree, void* data);
-void* avlt_remove(AVLTree* tree, void* data);
-void* avlt_get(AVLTree* tree, void* data);
-int avlt_contains(AVLTree* tree, void* data);
+void* avlt_put(AVLTree* tree, void* key, void* value);
+void* avlt_remove(AVLTree* tree, void* key);
+void* avlt_get(AVLTree* tree, void* key);
 void avlt_clear(AVLTree* tree);
 
-
-/* TODO:
-* - Change into key-value pairs
-* - put, min, max, predecessor, successor
-*/
+void* avlt_min(AVLTree* tree);
+void* avlt_max(AVLTree* tree);
+void* avlt_predecessor(AVLTree* tree, void* key);
+void* avlt_successor(AVLTree* tree, void* key);

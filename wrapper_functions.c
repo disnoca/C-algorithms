@@ -28,7 +28,6 @@ void* Calloc(size_t nitems, size_t size) {
 void Free(void* ptr) {
     free_calls++;
     free(ptr);
-    ptr = NULL;
 }
 
 void* Realloc(void* ptr, size_t size) {
