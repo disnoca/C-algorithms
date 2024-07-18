@@ -37,7 +37,7 @@ DynamicArray* da_create(size_t inital_capacity)
 
 void da_add(DynamicArray* da, void* data)
 {
-	if (da->size >= da->capacity)
+	if (da->size == da->capacity)
 		resize(da);
 
 	da->arr[da->size++] = data;
