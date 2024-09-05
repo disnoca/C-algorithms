@@ -389,7 +389,7 @@ static void slab_destroy(kmem_cache_t* cache, slab_t* slab)
 }
 
 
-void slab_print(void)
+void slab_print_heap(void)
 {
 	void print_cache(list_t* entry) {
 		if(((kmem_cache_t*) entry) != &cache_cache && !LIST_IS_EMPTY(&((kmem_cache_t*) entry)->slabs_partial))

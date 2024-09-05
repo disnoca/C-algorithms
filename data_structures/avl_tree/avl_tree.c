@@ -225,7 +225,7 @@ static void update_balance_on_remove(AVLTree* tree, AVLTreeNode* node)
 
 static AVLTreeNode* create_node(void* key, void* value)
 {
-	AVLTreeNode* node = (AVLTreeNode*) Calloc(1, sizeof(AVLTreeNode));
+	AVLTreeNode* node = (AVLTreeNode*) Calloc(sizeof(AVLTreeNode), 1);
 	node->key = key;
 	node->value = value;
 	return node;

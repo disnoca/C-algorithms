@@ -38,8 +38,8 @@ void test_malloc(void)
 		slab_free(ptrs[i], sizes[i]);
 	}
 
-	//print_heap();
-	slab_print();
+	//bb_print_heap();
+	slab_print_heap();
 	fprintf(stderr, "test malloc finished\n");
 }
 
@@ -51,7 +51,7 @@ void test_add_hole(void)
 	bb_add_hole(heap_start + (1 << 26), heap_start + (1 << 28));
 	bb_add_hole(heap_start, heap_start + 1);
 
-	//print_heap();
+	//bb_print_heap();
 }
 
 int main(void)

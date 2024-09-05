@@ -12,7 +12,7 @@
 
 static DLLNode* create_node(void* data)
 {
-	DLLNode* node = (DLLNode*) Calloc(1, sizeof(DLLNode));
+	DLLNode* node = (DLLNode*) Calloc(sizeof(DLLNode), 1);
 	node->data = data;
 	return node;
 }

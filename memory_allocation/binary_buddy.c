@@ -147,7 +147,7 @@ void bb_add_hole(void* start_addr, void* end_addr)
 	}
 }
 
-void print_heap(void)
+void bb_print_heap(void)
 {
 	for(int i = 0; i <= LEVEL_MAX; i++)
 	{
