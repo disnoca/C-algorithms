@@ -5,7 +5,7 @@
 #include "../../wrapper_functions.h"
 
 
-static void print_graph_contents(Graph* graph)
+__attribute__((unused)) static void print_graph_contents(Graph* graph)
 {
 	for (size_t i = 0; i < graph->num_edges; i++) {
 		GraphEdge* edge = graph->edges[i];

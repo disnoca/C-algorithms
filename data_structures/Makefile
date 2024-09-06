@@ -6,6 +6,8 @@ all:
 	cd doubly_linked_list && make $@
 	cd queue && make $@
 	cd stack && make $@
+	cd graph && make $@
+	cd bitmap && make $@
 
 .PHONY : run
 run:
@@ -15,6 +17,8 @@ run:
 	cd doubly_linked_list && make $@
 	cd queue && make $@
 	cd stack && make $@
+	cd graph && make $@
+	cd bitmap && make $@
 
 .PHONY : clean
 clean:
@@ -24,3 +28,5 @@ clean:
 	cd doubly_linked_list && make $@
 	cd queue && make $@
 	cd stack && make $@
+	cd graph && make $@
+	cd bitmap && make $@
