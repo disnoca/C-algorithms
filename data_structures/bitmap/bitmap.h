@@ -19,9 +19,9 @@ typedef bitmap_array_elem_t bitmap_t;
  * @param bitmap the bitmap to allocate from
  * @param size the size of the bitmap in bytes
  * @param nentries the number of entries to allocate
- * @param nfound output pointer to the maximum number of contiguous entries found
+ * @param nfound output pointer to the maximum number of contiguous entries found (can be NULL)
  * 
- * @return the index of the first entry or 0
+ * @return the index of the first entry or 0 if not enough contiguous entries were found
 */
 unsigned long bitmap_alloc(bitmap_t* bitmap, size_t size, size_t nentries, size_t* nfound);
 
