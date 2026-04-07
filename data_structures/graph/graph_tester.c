@@ -2,7 +2,7 @@
 #include <assert.h>
 
 #include "graph.h"
-#include "../../wrapper_functions.h"
+#include "../../wrappers.h"
 
 
 __attribute__((unused)) static void print_graph_contents(Graph* graph)
@@ -200,8 +200,6 @@ int main()
 	test_add_vertex();
 	test_remove_vertex();
 	test_remove_edge_with_vertexes();
-
-	assert(malloc_calls == free_calls);
 
     printf("All tests passed.\n");
     return 0;

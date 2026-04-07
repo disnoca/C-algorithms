@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -lm
 
-SOURCES := ../wrapper_functions.c \
+SOURCES := \
 insertion_sort.c \
 bubble_sort.c \
 selection_sort.c \

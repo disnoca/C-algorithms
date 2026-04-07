@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra
 
-SOURCES = ../../wrapper_functions.c doubly_linked_list.c
+SOURCES = doubly_linked_list.c
 
 TARGET = doubly_linked_list_tester
 

@@ -1,8 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra
 
-SOURCES := ../wrapper_functions.c \
-CRC32.c
+SOURCES := CRC32.c
 
 TARGET = hashing_tester
 

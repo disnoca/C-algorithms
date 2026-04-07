@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -g
 
-SOURCES = ../../wrapper_functions.c graph.c
+SOURCES = graph.c
 
 TARGET = graph_tester
 

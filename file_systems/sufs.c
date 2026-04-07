@@ -4,7 +4,7 @@
 #include "sufs.h"
 #include "fs.h"
 #include "../utils.h"
-#include "../wrapper_functions.h"
+#include "../wrappers.h"
 #include "../data_structures/bitmap/bitmap.h"
 
 
@@ -46,73 +46,73 @@ void sufs_mount(disk_t* _disk)
 {
 	disk = _disk;
 	if (disk->sector_size < 512)
-		exit_with_error("Sectors size smaller than 512 bytes not supported\n");
+		Wexit_with_error("Sectors size smaller than 512 bytes not supported\n");
 	if (disk->sector_size != 512)	// TODO: support other sector sizes
-		exit_with_error("Sector size different from 512 bytes not supported\n");
+		Wexit_with_error("Sector size different from 512 bytes not supported\n");
 
 	disk_read_sector(disk, &sb, SUPERBLOCK_SECTOR);
 
 	if (sb.sb_magic != SUFS_MAGIC)
-		exit_with_error("Invalid magic number\n");
+		Wexit_with_error("Invalid magic number\n");
 
 	if (sb.sb_block_size < MAX(SUFS_BLOCK_SIZE_MIN, disk->sector_size) ||
 			sb.sb_block_size > SUFS_BLOCK_SIZE_MAX || !IS_POWER_OF_2(sb.sb_block_size))
-		exit_with_error("Invalid block size\n");
+		Wexit_with_error("Invalid block size\n");
 
 	disk->block_size = sb.sb_block_size;
 
 	uint32_t sb_block = SUFS_SUPERBLOCK_OFFSET / sb.sb_block_size;
 	if (sb.sb_block_count > disk->capacity / sb.sb_block_size)
-		exit_with_error("Invalid block count\n");
+		Wexit_with_error("Invalid block count\n");
 
 	if (sb.sb_iblock_count == 0)
-		exit_with_error("Invalid inode block count\n");
+		Wexit_with_error("Invalid inode block count\n");
 	if (sb.sb_dblock_count == 0)
-		exit_with_error("Invalid data block count\n");
+		Wexit_with_error("Invalid data block count\n");
 	if (sb.sb_inode_count > sb.sb_iblock_count * sb.sb_inopb)
-		exit_with_error("Invalid inode count\n");
+		Wexit_with_error("Invalid inode count\n");
 	if (sb.sb_free_inode_count >= sb.sb_inode_count)
-		exit_with_error("Invalid free inode count\n");
+		Wexit_with_error("Invalid free inode count\n");
 	if (sb.sb_free_dblock_count >= sb.sb_dblock_count)
-		exit_with_error("Invalid free data block count\n");
+		Wexit_with_error("Invalid free data block count\n");
 
 	if (sb.sb_block_count < sb_block + 1 + sb.sb_inode_map_bsize +
 			sb.sb_dblock_map_bsize + sb.sb_iblock_count + sb.sb_dblock_count)
-		exit_with_error("Invalid block count\n");
+		Wexit_with_error("Invalid block count\n");
 
 	if (sb.sb_inode_map_bsize == 0 ||
 			sb.sb_inode_map_bsize * sb.sb_mapentpb < sb.sb_inode_count)
-		exit_with_error("Invalid inode map block size\n");
+		Wexit_with_error("Invalid inode map block size\n");
 	if (sb.sb_dblock_map_bsize == 0 ||
 			sb.sb_dblock_map_bsize * sb.sb_mapentpb < sb.sb_dblock_count)
-		exit_with_error("Invalid data block map block size\n");
+		Wexit_with_error("Invalid data block map block size\n");
 
 	if (sb.sb_inode_map_boff < sb_block + 1 ||
 			sb.sb_inode_map_boff + sb.sb_inode_map_bsize > sb.sb_dblock_map_boff)
-		exit_with_error("Invalid inode map block offset\n");
+		Wexit_with_error("Invalid inode map block offset\n");
 	if (sb.sb_dblock_map_boff < sb.sb_inode_map_boff + sb.sb_inode_map_bsize ||
 			sb.sb_dblock_map_boff + sb.sb_dblock_map_bsize > sb.sb_inodes_boff)
-		exit_with_error("Invalid data block map block offset\n");
+		Wexit_with_error("Invalid data block map block offset\n");
 	if (sb.sb_inodes_boff < sb.sb_dblock_map_boff + sb.sb_dblock_map_bsize ||
 			sb.sb_inodes_boff + sb.sb_iblock_count > sb.sb_dblocks_boff)
-		exit_with_error("Invalid inode region block offset\n");
+		Wexit_with_error("Invalid inode region block offset\n");
 	if (sb.sb_dblocks_boff < sb.sb_inodes_boff + sb.sb_iblock_count ||
 			sb.sb_dblocks_boff + sb.sb_dblock_count > sb.sb_block_count)
-		exit_with_error("Invalid data block region block offset\n");
+		Wexit_with_error("Invalid data block region block offset\n");
 
 	if (sb.sb_secpb != sb.sb_block_size / disk->sector_size)
-		exit_with_error("Invalid number of sectors per block\n");
+		Wexit_with_error("Invalid number of sectors per block\n");
 	if (sb.sb_nindir != sb.sb_block_size / sizeof(sufs_daddr_t))
-		exit_with_error("Invalid number of entries per indirect block\n");
+		Wexit_with_error("Invalid number of entries per indirect block\n");
 	if (sb.sb_inopb != sb.sb_block_size / sizeof(struct sufs_dinode))
-		exit_with_error("Invalid number of inodes per block\n");
+		Wexit_with_error("Invalid number of inodes per block\n");
 	if (sb.sb_mapentpb != sb.sb_block_size * 8)
-		exit_with_error("Invalid number of map entries per block\n");
+		Wexit_with_error("Invalid number of map entries per block\n");
 	if (sb.sb_dentpb != sb.sb_block_size / sizeof(struct sufs_dentry))
-		exit_with_error("Invalid number of directory entries per block\n");
+		Wexit_with_error("Invalid number of directory entries per block\n");
 
 	if (sb.sb_roodir_inum == 0 || sb.sb_roodir_inum >= sb.sb_inode_count)
-		exit_with_error("Invalid root directory inode number\n");
+		Wexit_with_error("Invalid root directory inode number\n");
 
 	uint64_t expected_maxfilesize = SUFS_NDADDR;
 	for (int i = 0; i < SUFS_NIADDR; i++) {
@@ -176,7 +176,7 @@ ssize_t sufs_write(struct sufs_dinode* inode, void* data, uint64_t offset, size_
 	uint32_t end_block_idx = end_offset / sb.sb_block_size;
 
 	if (end_block_idx > SUFS_NDADDR)	// TODO
-		exit_with_error("Indirect blocks not supported yet. Current maximum file size is %lu\n", sb.sb_block_size * SUFS_NDADDR);
+		Wexit_with_error("Indirect blocks not supported yet. Current maximum file size is %lu\n", sb.sb_block_size * SUFS_NDADDR);
 
 	uint32_t i = offset / sb.sb_block_size;
 	size_t to_write;
@@ -356,7 +356,7 @@ void sufs_dump_dir_tree(void)
 						struct dir* new_dir = Malloc(sizeof(struct dir));
 						memcpy(&new_dir->inode, &inode, sizeof(struct sufs_dinode));
 						if (snprintf(new_dir->name, SUFS_MAX_FILENAME_LEN + 1, "%s/%s", curr_dir->name, dentries[j].de_name) > SUFS_MAX_FILENAME_LEN) {
-							exit_with_error("Error: child name exceeds max length. Stopping.\n");
+							Wexit_with_error("Error: child name exceeds max length. Stopping.\n");
 							goto ret;
 						}
 						stack_push(&dir_stack, new_dir);
@@ -569,7 +569,7 @@ static void remove_dir_dblock(struct sufs_dinode* dir_inode, uint32_t idx)
 static uint32_t get_data_block(const struct sufs_dinode* inode, uint32_t idx)
 {
 	if (idx >= SUFS_NDADDR) {	// TODO: don't forget to use indirect_block_buf
-		exit_with_error("Indirect blocks not supported yet. Current maximum file size is %lu\n", sb.sb_block_size * SUFS_NDADDR);
+		Wexit_with_error("Indirect blocks not supported yet. Current maximum file size is %lu\n", sb.sb_block_size * SUFS_NDADDR);
 		fs_errno = EFBIG;
 		return 0;
 	}
@@ -590,7 +590,7 @@ static uint32_t get_data_block(const struct sufs_dinode* inode, uint32_t idx)
 static uint32_t alloc_data_block(struct sufs_dinode* inode, uint32_t idx)
 {
 	if (idx >= SUFS_NDADDR) {	// TODO: don't forget to use indirect_block_buf
-		exit_with_error("Indirect blocks not supported yet. Current maximum file size is %lu\n", sb.sb_block_size * SUFS_NDADDR);
+		Wexit_with_error("Indirect blocks not supported yet. Current maximum file size is %lu\n", sb.sb_block_size * SUFS_NDADDR);
 		fs_errno = EFBIG;
 		return 0;
 	}

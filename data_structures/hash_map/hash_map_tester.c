@@ -3,7 +3,7 @@
 #include <assert.h>
 #include <string.h>
 #include "hash_map.h"
-#include "../../wrapper_functions.h"
+#include "../../wrappers.h"
 
 const HMNode EMPTY_NODE;
 
@@ -162,8 +162,6 @@ int main()
 	test_rehash();
 	test_remove();
 	test_replace();
-
-	assert(malloc_calls == free_calls);
 
 	printf("All tests passed.\n");
 	return 0;

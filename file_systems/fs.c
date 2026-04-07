@@ -1,6 +1,6 @@
 #include <string.h>
 
-#include "../wrapper_functions.h"
+#include "../wrappers.h"
 #include "fs.h"
 #include "sufs.h"
 #include "path_utils.h"

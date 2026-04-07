@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra
 
-SOURCES = ../../wrapper_functions.c heap.c
+SOURCES = heap.c
 
 TARGET = heap_tester
 

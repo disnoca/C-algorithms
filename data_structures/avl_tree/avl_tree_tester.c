@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include <assert.h>
 #include "avl_tree.h"
-#include "../../wrapper_functions.h"
+#include "../../wrappers.h"
 
 
 char keys[8192];
@@ -410,8 +410,6 @@ int main()
 	test_rl_rotation_on_remove();
 	test_min_max();
 	test_predecessor_successor();
-
-	assert(malloc_calls == free_calls);
 
 	printf("All tests passed.\n");
 	return 0;

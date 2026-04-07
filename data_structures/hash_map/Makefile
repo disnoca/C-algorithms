@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra
 
-SOURCES =  ../../wrapper_functions.c hash_map.c
+SOURCES =  hash_map.c
 
 TARGET = hash_map_tester
 

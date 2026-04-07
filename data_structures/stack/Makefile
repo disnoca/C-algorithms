@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra
 
-SOURCES = ../../wrapper_functions.c stack.c
+SOURCES = stack.c
 
 TARGET = stack_tester
 

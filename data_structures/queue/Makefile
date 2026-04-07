@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra
 
-SOURCES = ../../wrapper_functions.c queue.c
+SOURCES = queue.c
 
 TARGET = queue_tester
 

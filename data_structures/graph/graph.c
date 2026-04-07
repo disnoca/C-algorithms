@@ -2,7 +2,7 @@
 #include <string.h>
 
 #include "graph.h"
-#include "../../wrapper_functions.h"
+#include "../../wrappers.h"
 
 
 /* ---------------- Helper Functions ---------------- */
@@ -16,7 +16,7 @@ static size_t find_edge_pos(Graph* g, int id)
 		if (g->edges[i]->id == id)
 			return i;
 		
-	exit_with_error("No such edge with id %llu\n", id);
+	Wexit_with_error("No such edge with id %llu\n", id);
 	return SIZE_MAX;
 }
 

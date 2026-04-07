@@ -73,7 +73,8 @@ void bitmap_free(bitmap_array_elem_t* bitmap, size_t bitmap_entry, size_t nentri
 	{
 		size_t bits_to_zero = MIN(BMAP_ENTRIES_PER_ARR_ELEM - bit_offset, nentries);
 
-		bitmap_array_elem_t mask = bits_to_zero == BMAP_ENTRIES_PER_ARR_ELEM ? BMAP_ARRAY_ELEM_MAX :
+		bitmap_array_elem_t mask = (bits_to_zero == BMAP_ENTRIES_PER_ARR_ELEM) ?
+			BMAP_ARRAY_ELEM_MAX :
 			~(BMAP_ARRAY_ELEM_MAX << bits_to_zero) << bit_offset;
 		bitmap[array_entry] &= ~mask;
 
@@ -94,7 +95,8 @@ static void set_entries_used(bitmap_array_elem_t* bitmap, size_t bitmap_entry, s
 	{
 		size_t bits_to_set = MIN(BMAP_ENTRIES_PER_ARR_ELEM - bit_offset, nentries);
 
-		bitmap_array_elem_t mask = bits_to_set == BMAP_ENTRIES_PER_ARR_ELEM ? BMAP_ARRAY_ELEM_MAX :
+		bitmap_array_elem_t mask = (bits_to_set == BMAP_ENTRIES_PER_ARR_ELEM) ?
+			BMAP_ARRAY_ELEM_MAX :
 			~(BMAP_ARRAY_ELEM_MAX << bits_to_set) << bit_offset;
 		bitmap[array_entry] |= mask;
 

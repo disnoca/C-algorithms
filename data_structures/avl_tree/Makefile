@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra
 
-SOURCES = ../../wrapper_functions.c avl_tree.c
+SOURCES = avl_tree.c
 
 TARGET = avl_tree_tester
 

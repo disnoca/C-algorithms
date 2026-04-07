@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include <assert.h>
 #include "sorting.h"
-#include "../wrapper_functions.h"
+#include "../wrappers.h"
 
 #define ARRAY_LENGTH 10000
 

@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "avl_tree.h"
-#include "../../wrapper_functions.h"
+#include "../../wrappers.h"
 
 
 #define NORMALIZE_COMPARE(x) ({ int _x = (x); _x = _x > 0 ? 1 : _x; _x = _x < 0 ? -1 : _x; _x; })

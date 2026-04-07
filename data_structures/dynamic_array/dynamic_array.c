@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include "dynamic_array.h"
-#include "../../wrapper_functions.h"
+#include "../../wrappers.h"
 
 /* ---------------- Helper Functions ---------------- */
 

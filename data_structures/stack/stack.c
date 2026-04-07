@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "stack.h"
-#include "../../wrapper_functions.h"
+#include "../../wrappers.h"
 
 /* ---------------- Helper Functions ---------------- */
 

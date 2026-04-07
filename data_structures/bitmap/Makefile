@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra
 
-SOURCES = ../../wrapper_functions.c bitmap.c
+SOURCES = bitmap.c
 
 TARGET = bitmap_tester
 

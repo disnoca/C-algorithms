@@ -1,7 +1,12 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -g
 
-SOURCES = fs.c path_utils.c sufs.c disk.c ../wrapper_functions.c ../data_structures/bitmap/bitmap.c
+SOURCES := \
+fs.c \
+path_utils.c \
+sufs.c \
+disk.c \
+../data_structures/bitmap/bitmap.c
 
 TARGET = fs_tester
 
@@ -13,8 +18,8 @@ all: $(TARGET) newfs disk.img
 $(TARGET): $(TARGET).c $(SOURCES:.c=.o)
 	$(CC) $(CFLAGS) -o $@ $< $(SOURCES:.c=.o)
 
-newfs: newfs.c disk.o ../wrapper_functions.o
-	$(CC) $(CFLAGS) -o $@ $< disk.o ../wrapper_functions.o
+newfs: newfs.c disk.o ../wrappers.o
+	$(CC) $(CFLAGS) -o $@ $< disk.o ../wrappers.o
 
 disk.img:
 	dd if=/dev/zero of=disk.img bs=1M count=100

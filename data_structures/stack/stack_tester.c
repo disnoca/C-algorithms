@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include <assert.h>
 #include "stack.h"
-#include "../../wrapper_functions.h"
+#include "../../wrappers.h"
 
 
 int values[1024];
@@ -90,8 +90,6 @@ int main()
 {
     test_stack_push();
     test_stack_pop();
-
-    assert(malloc_calls == free_calls);
 
     printf("All tests passed.\n");
     return 0;

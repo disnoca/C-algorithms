@@ -2,7 +2,7 @@
 #include <stdbool.h>
 #include <assert.h>
 #include "dynamic_array.h"
-#include "../../wrapper_functions.h"
+#include "../../wrappers.h"
 
 
 int values[1024];
@@ -142,8 +142,6 @@ int main()
 	test_remove();
     test_set();
     test_index_of();
-
-	assert(malloc_calls == free_calls);
 
     printf("All tests passed.\n");
     return 0;

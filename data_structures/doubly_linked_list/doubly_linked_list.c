@@ -6,7 +6,7 @@
 
 #include <stdlib.h>
 #include "doubly_linked_list.h"
-#include "../../wrapper_functions.h"
+#include "../../wrappers.h"
 
 /* ---------------- Helper Functions ---------------- */
 

@@ -5,7 +5,7 @@
 #include "fs.h"
 #include "disk.h"
 #include "../utils.h"
-#include "../wrapper_functions.h"
+#include "../wrappers.h"
 
 
 #define BLOCK_SIZE_DEFAULT		(1 << 10)
@@ -44,7 +44,7 @@ static void write_superblock()
 {
 	sb.sb_block_size = BLOCK_SIZE_DEFAULT;
 	if (disk.sector_size > sb.sb_block_size)
-		exit_with_error("Block size cannot be smaller than sector size");
+		Wexit_with_error("Block size cannot be smaller than sector size");
 
 	sb.sb_block_count = disk.capacity / sb.sb_block_size;
 
@@ -70,7 +70,7 @@ static void write_superblock()
 	sb.sb_dblocks_boff = sb.sb_inodes_boff + sb.sb_iblock_count;
 
 	if (sb.sb_dblocks_boff >= sb.sb_block_count || sb.sb_inode_count >= sb.sb_dblock_count)
-		exit_with_error("Disk is too small");
+		Wexit_with_error("Disk is too small");
 	
 	sb.sb_roodir_inum = 1;
 	sb.sb_free_inode_count = sb.sb_inode_count - 1;	// root dir

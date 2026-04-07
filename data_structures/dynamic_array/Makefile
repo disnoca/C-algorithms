@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra
 
-SOURCES = ../../wrapper_functions.c dynamic_array.c
+SOURCES = dynamic_array.c
 
 TARGET = dynamic_array_tester
 

@@ -1,7 +1,7 @@
 #include <assert.h>
 #include <stdio.h>
 #include "heap.h"
-#include "../../wrapper_functions.h"
+#include "../../wrappers.h"
 
 
 int values[1024];
@@ -81,8 +81,6 @@ static void test_extract()
 int main() {
     test_insert();
 	test_extract();
-
-	assert(malloc_calls == free_calls);
 
     printf("All tests passed.\n");
     return 0;

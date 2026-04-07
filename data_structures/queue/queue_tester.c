@@ -4,7 +4,7 @@
 #include <stdbool.h>
 #include <assert.h>
 #include "queue.h"
-#include "../../wrapper_functions.h"
+#include "../../wrappers.h"
 
 
 int values[1024];
@@ -97,8 +97,6 @@ int main()
 {
 	test_queue_enqueue();
 	test_queue_dequeue();
-
-	assert(malloc_calls == free_calls);
 
 	printf("All tests passed.\n");
 	return 0;

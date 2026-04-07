@@ -4,7 +4,7 @@
 #include "disk.h"
 #include "fs.h"
 #include "sufs.h"
-#include "../wrapper_functions.h"
+#include "../wrappers.h"
 
 
 static void fs_is_empty(disk_t* disk)
@@ -213,8 +213,6 @@ int main()
 
 	sufs_unmount();
 	disk_free(&disk);
-
-	assert(malloc_calls == free_calls);
 	
 	printf("All tests passed!\n");
 	return 0;

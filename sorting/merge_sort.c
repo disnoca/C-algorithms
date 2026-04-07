@@ -5,7 +5,7 @@
 */
 
 #include "sorting.h"
-#include "../wrapper_functions.h"
+#include "../wrappers.h"
 
 static void merge(int* arr, int* left_arr, int left_length, int* right_arr, int right_length)
 {
